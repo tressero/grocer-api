@@ -15,6 +15,8 @@ INSERT INTO "Recipe" ("Id", "Name", "Url")
 VALUES ('00000000-0000-0000-0000-000000000001', 'Vegetable Soup', 'https://ochsners.us');
 
 INSERT INTO "StoreSection" ("Id", "Name")
+VALUES ('00000000-0000-0000-0000-000000000000', 'N/A');
+INSERT INTO "StoreSection" ("Id", "Name")
 VALUES ('00000000-0000-0000-0000-000000000001', 'Produce');
 INSERT INTO "StoreSection" ("Id", "Name")
 VALUES ('00000000-0000-0000-0000-000000000002', 'Meat');
