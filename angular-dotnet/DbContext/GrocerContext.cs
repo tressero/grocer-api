@@ -5,6 +5,8 @@ namespace angular_dotnet.DbContext;
 
 public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
 {
+    public GrocerContext(DbContextOptions options): base(options) {}
+    
     public DbSet<Ingredient> Ingredient { get; set; }
     public DbSet<Recipe> Recipe { get; set; }
     public DbSet<RecipeIngredientJunction> RecipeIngredientJunction { get; set; }

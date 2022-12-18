@@ -22,3 +22,20 @@
     </tr>
   </tbody>
 </table>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="recipes">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>RecipeName</th>
+    <th>Website</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let recipe of recipes">
+    <td>{{ recipe.id }}</td>
+    <td>{{ recipe.name }}</td>
+    <td>{{ recipe.url }}</td>
+  </tr>
+  </tbody>
+</table>

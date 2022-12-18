@@ -30,7 +30,7 @@ https://customer.elephantsql.com/instance/
 https://dev.to/moe23/add-automapper-to-net-6-3fdn
 https://www.c-sharpcorner.com/article/automapper-in-net-6-web-api/
 https://stackoverflow.com/questions/10900250/select-all-rows-using-entity-framework
-
+https://www.c-sharpcorner.com/article/implement-unit-of-work-and-generic-repository-pattern-in-a-web-api-net-core-pro/
 
 # Angular Client App
 
