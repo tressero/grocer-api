@@ -5,17 +5,30 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html'
 })
+
 export class FetchDataComponent {
   public forecasts: WeatherForecast[] = [];
-
+  public recipes: Recipe[] = []
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
-    // http.get<WeatherForecast[]>("http://localhost:5165/" + 'weatherforecast').subscribe(result => {
+    http.get<WeatherForecast[]>(baseUrl + 'weatherforecast')
+      .subscribe(result => {
       this.forecasts = result;
-    }, error => console.error(error));
+    },
+  error => console.error(error));
+
+    http.get<Recipe[]>(baseUrl + 'recipelist')
+      .subscribe(result => {
+          this.recipes = result;
+        },
+        error => console.error(error));
   }
 }
 
+interface Recipe {
+  id: string;
+  name: string;
+  url: string;
+}
 interface WeatherForecast {
   date: string;
   temperatureC: number;
