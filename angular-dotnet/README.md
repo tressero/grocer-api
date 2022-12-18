@@ -24,5 +24,17 @@ dotnet ef migrations script "$NEW_MIGRATION_NAME" "$PREV_MIGRATION_NAME" --verbo
 
 ```
 
+Some links
 
 https://customer.elephantsql.com/instance/
+https://dev.to/moe23/add-automapper-to-net-6-3fdn
+https://www.c-sharpcorner.com/article/automapper-in-net-6-web-api/
+https://stackoverflow.com/questions/10900250/select-all-rows-using-entity-framework
+
+
+# Angular Client App
+
+Run below. Note: due to SPA proxy, you will not be able to access swagger.
+```bash
+cd ~/RiderProjects/app-grocer/angular-dotnet/ClientApp/ && npm run start
+```
