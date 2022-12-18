@@ -11,6 +11,7 @@ public class RecipeIngredientJunction
     }
     [Key]
     public Guid IngredientId { get; set; }
+    public int IngredientCount { get; set; }
     [Key]
     public Guid RecipeId { get; set; }
     

@@ -4,14 +4,14 @@
 # INITIALIZE
 INIT_MIGRATION_NAME='InitialCreate'
 DATE_NOW=$(TZ=UTC date +"%Y%m%d%H%M") # E.g. 202210272247, same format as migrations used for up.sql, down.sql
-dotnet ef migrations add "INIT_MIGRATION_NAME"
+dotnet ef migrations add "$INIT_MIGRATION_NAME"
 dotnet ef migrations script -o ./Migrations/SQL/"$DATE_NOW"_"$INIT_MIGRATION_NAME".up.sql
 
 ##############################################
 
 # UPDATE
-PREV_MIGRATION_NAME='SourceMigrationName'
-NEW_MIGRATION_NAME='DestinationMigrationName'
+PREV_MIGRATION_NAME='InitialCreate'
+NEW_MIGRATION_NAME='InitialSeed'
 DATE_NOW=$(TZ=UTC date +"%Y%m%d%H%M") # E.g. 202210272247, same format as migrations used for up.sql, down.sql
 
 ## Create an Update

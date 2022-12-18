@@ -12,7 +12,7 @@ using angular_dotnet.DbContext;
 namespace angular_dotnet.Migrations
 {
     [DbContext(typeof(GrocerContext))]
-    [Migration("20221218013345_InitialCreate")]
+    [Migration("20221218032428_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,14 @@ namespace angular_dotnet.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid>("StoreSectionId")
                         .HasColumnType("uuid");
@@ -70,6 +78,9 @@ namespace angular_dotnet.Migrations
 
                     b.Property<Guid>("RecipeId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("IngredientCount")
+                        .HasColumnType("integer");
 
                     b.HasKey("IngredientId", "RecipeId");
 
