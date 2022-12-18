@@ -9,9 +9,15 @@ public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
     public DbSet<Recipe> Recipe { get; set; }
     public DbSet<RecipeIngredientJunction> RecipeIngredientJunction { get; set; }
     public DbSet<StoreSection> StoreSection { get; set; }
+    
+    
+    private static string _username = "";
+    private static string _password = "";
+    private static string _server = "";
+    private static string _database = _username;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(@"Host=myserver;Username=mylogin;Password=mypass;Database=mydatabase");
+        => optionsBuilder.UseNpgsql($"Host={_server};Username={_username};Password={_password};Database={_database}");
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,6 +38,7 @@ public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
         /* Seed data */
         
         /* Store locations */
+        // For some reason, 0x0 Guid doesn't work with EF, but it was added manaully to Up/DOWN SQL and ran on postgresqls
         // modelBuilder.Entity<StoreSection>().HasData(new StoreSection { Id = Guid.Parse("00000000-0000-0000-0000-000000000000"), Name = "N/A" });
         modelBuilder.Entity<StoreSection>().HasData(new StoreSection { Id = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "Produce" });
         modelBuilder.Entity<StoreSection>().HasData(new StoreSection { Id = Guid.Parse("00000000-0000-0000-0000-000000000002"), Name = "Meat" });

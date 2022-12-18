@@ -23,3 +23,6 @@ dotnet ef migrations script "$NEW_MIGRATION_NAME" "$PREV_MIGRATION_NAME" --verbo
 
 
 ```
+
+
+https://customer.elephantsql.com/instance/
