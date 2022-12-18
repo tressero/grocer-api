@@ -18,8 +18,8 @@ public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
     private static string _server = "";
     private static string _database = _username;
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql($"Host={_server};Username={_username};Password={_password};Database={_database}");
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //     => optionsBuilder.UseNpgsql($"Host={_server};Username={_username};Password={_password};Database={_database}");
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
