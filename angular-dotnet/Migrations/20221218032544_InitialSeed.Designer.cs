@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using angular_dotnet.DbContext;
@@ -11,9 +12,10 @@ using angular_dotnet.DbContext;
 namespace angular_dotnet.Migrations
 {
     [DbContext(typeof(GrocerContext))]
-    partial class GrocerContextModelSnapshot : ModelSnapshot
+    [Migration("20221218032544_InitialSeed")]
+    partial class InitialSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

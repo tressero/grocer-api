@@ -39,6 +39,8 @@ namespace angular_dotnet.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
                     Unit = table.Column<string>(type: "text", nullable: false),
                     StoreSectionId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -58,7 +60,8 @@ namespace angular_dotnet.Migrations
                 columns: table => new
                 {
                     IngredientId = table.Column<Guid>(type: "uuid", nullable: false),
-                    RecipeId = table.Column<Guid>(type: "uuid", nullable: false)
+                    RecipeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    IngredientCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
