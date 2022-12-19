@@ -4,25 +4,27 @@
 
 <p *ngIf="!forecasts"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="forecasts">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Temp. (C)</th>
-      <th>Temp. (F)</th>
-      <th>Summary</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let forecast of forecasts">
-      <td>{{ forecast.date }}</td>
-      <td>{{ forecast.temperatureC }}</td>
-      <td>{{ forecast.temperatureF }}</td>
-      <td>{{ forecast.summary }}</td>
-    </tr>
-  </tbody>
-</table>
+<!--<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="forecasts">-->
+<!--  <h3>forecasts</h3>-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th>Date</th>-->
+<!--      <th>Temp. (C)</th>-->
+<!--      <th>Temp. (F)</th>-->
+<!--      <th>Summary</th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--    <tr *ngFor="let forecast of forecasts">-->
+<!--      <td>{{ forecast.date }}</td>-->
+<!--      <td>{{ forecast.temperatureC }}</td>-->
+<!--      <td>{{ forecast.temperatureF }}</td>-->
+<!--      <td>{{ forecast.summary }}</td>-->
+<!--    </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
 
+<h3>recipes</h3>
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="recipes">
   <thead>
   <tr>
@@ -36,6 +38,62 @@
     <td>{{ recipe.id }}</td>
     <td>{{ recipe.name }}</td>
     <td>{{ recipe.url }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<h3>recipeIngredients</h3>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="recipeIngredients">
+  <thead>
+  <tr>
+    <th>RecipeId</th>
+    <th>IngredientId</th>
+    <th>IngredientCount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let recipeIngredient of recipeIngredients">
+    <td>{{ recipeIngredient.recipeId }}</td>
+    <td>{{ recipeIngredient.ingredientId }}</td>
+    <td>{{ recipeIngredient.ingredientCount }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<h3>ingredients</h3>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="ingredients">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Unit</th>
+    <th>StoreSectionId</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ingredient of ingredients">
+    <td>{{ ingredient.id }}</td>
+    <td>{{ ingredient.name }}</td>
+    <td>{{ ingredient.description }}</td>
+    <td>{{ ingredient.unit }}</td>
+    <td>{{ ingredient.storeSectionId }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<h3>storeSections</h3>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="storeSections">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let storeSection of storeSections">
+    <td>{{ storeSection.id }}</td>
+    <td>{{ storeSection.name }}</td>
   </tr>
   </tbody>
 </table>

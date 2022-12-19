@@ -8,11 +8,14 @@ const target = env.ASPNETCORE_HTTPS_PORT
 
 console.log('target',target);
 
+/* Note: changing this may require re-running 'npm run start' (no live reload on changes?) */
 const PROXY_CONFIG = [
   {
     context: [
-      "/weatherforecast",
-      "/recipelist",
+      '/Recipe',
+      '/RecipeIngredient',
+      '/Ingredient',
+      '/StoreSection',
    ],
     target: target,
     secure: false,
