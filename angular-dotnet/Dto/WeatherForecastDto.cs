@@ -1,6 +1,6 @@
-namespace angular_dotnet;
+namespace angular_dotnet.Dto;
 
-public class WeatherForecast
+public class WeatherForecastDto
 {
     public DateTime Date { get; set; }
 
