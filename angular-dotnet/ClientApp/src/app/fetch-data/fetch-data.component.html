@@ -1,8 +1,8 @@
-<h1 id="tableLabel">Weather forecast</h1>
+<h1 id="tableLabel">Fetch Data</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-<p *ngIf="!forecasts"><em>Loading...</em></p>
+<!--<p *ngIf="!forecasts"><em>Loading...</em></p>-->
 
 <!--<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="forecasts">-->
 <!--  <h3>forecasts</h3>-->
@@ -83,17 +83,41 @@
 </table>
 
 <h3>storeSections</h3>
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="storeSections">
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let storeSection of storeSections">
-    <td>{{ storeSection.id }}</td>
-    <td>{{ storeSection.name }}</td>
-  </tr>
-  </tbody>
+<!--<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="storeSections">-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>Id</th>-->
+<!--    <th>Name</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let storeSection of storeSections">-->
+<!--    <td>{{ storeSection.id }}</td>-->
+<!--    <td>{{ storeSection.name }}</td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="storeSections" mat-table [dataSource]="storeSections">
+  <!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
 </table>
+<!-- ADD/REMOVE ROWS https://stackblitz.com/run?file=src%2Fapp%2Ftable-dynamic-array-data-example.ts-->
+<!-- EDIT ROWS (WITH LINK TO ADD/REMOVE TOO) https://muhimasri.com/blogs/create-an-editable-dynamic-table-using-angular-material/ -->
+

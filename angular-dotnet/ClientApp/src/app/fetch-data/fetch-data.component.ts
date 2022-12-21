@@ -1,17 +1,22 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
+
 @Component({
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html'
 })
 
 export class FetchDataComponent {
+
   public forecasts: WeatherForecast[] = [];
   public recipes: Recipe[] = []
   public storeSections: StoreSection[] = [];
   public ingredients: Ingredient[] = [];
   public recipeIngredients: RecipeIngredient[] = [];
+  displayedColumns: string[] = ['id','name']; // Defines order
+
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
 
     http.get<Recipe[]>(baseUrl + 'Recipe').subscribe(
