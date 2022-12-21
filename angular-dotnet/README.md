@@ -26,11 +26,19 @@ dotnet ef migrations script "$NEW_MIGRATION_NAME" "$PREV_MIGRATION_NAME" --verbo
 
 Some links
 
+.NET
 https://customer.elephantsql.com/instance/
 https://dev.to/moe23/add-automapper-to-net-6-3fdn
 https://www.c-sharpcorner.com/article/automapper-in-net-6-web-api/
 https://stackoverflow.com/questions/10900250/select-all-rows-using-entity-framework
 https://www.c-sharpcorner.com/article/implement-unit-of-work-and-generic-repository-pattern-in-a-web-api-net-core-pro/
+
+Angular
+https://material.angular.io/guide/getting-started
+```angular2html
+ng add @angular/material #(adds to packge.json)
+
+```
 
 # Angular Client App
 
