@@ -7,41 +7,17 @@ public class AutoMapperProfile: Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<Recipe, RecipeDto>()
-            .ForMember(dest => dest.Name,
-                opt => opt.MapFrom(src => src.Name))
-            .ForMember(dest => dest.Url,
-                opt => opt.MapFrom(src => src.Url));
-        CreateMap<Ingredient, IngredientDto>()
-            .ForMember(dest => dest.Name,
-                opt => opt.MapFrom(src => src.Name))
-            .ForMember(dest => dest.Description,
-                opt => opt.MapFrom(src => src.Description))
-            .ForMember(dest => dest.StoreSectionId,
-                opt => opt.MapFrom(src => src.StoreSectionId))
-            .ForMember(dest => dest.Unit,
-                opt => opt.MapFrom(src => src.Unit));
-        
-        CreateMap<RecipeDto, Recipe>()
-            .ForMember(dest => dest.Name,
-                opt => opt.MapFrom(src => src.Name))
-            .ForMember(dest => dest.Url,
-                opt => opt.MapFrom(src => src.Url));
-        CreateMap<IngredientDto, Ingredient>()
-            .ForMember(dest => dest.Name, 
-                opt => opt.MapFrom(src => src.Name))
-            .ForMember(dest => dest.Description,
-                opt => opt.MapFrom(src => src.Description))
-            .ForMember(dest => dest.StoreSectionId,
-                opt => opt.MapFrom(src => src.StoreSectionId))
-            .ForMember(dest => dest.Unit,
-                opt => opt.MapFrom(src => src.Unit));
+        CreateMap<Recipe, RecipeDto>();
+        CreateMap<RecipeDto, Recipe>();
 
-        CreateMap<RecipeIngredientDto, RecipeIngredientJunction>();
+        CreateMap<Ingredient, IngredientDto>();
+        CreateMap<IngredientDto, Ingredient>();
+
         CreateMap<RecipeIngredientJunction, RecipeIngredientDto>();
+        CreateMap<RecipeIngredientDto, RecipeIngredientJunction>();
 
-        CreateMap<StoreSectionDto, StoreSection>();
         CreateMap<StoreSection, StoreSectionDto>();
+        CreateMap<StoreSectionDto, StoreSection>();
 
         // MULTI MAP - https://stackoverflow.com/questions/19544133/automapper-multi-object-source-and-one-destination
 
