@@ -12,28 +12,17 @@ export class FetchDataComponent {
   public ingredients: Ingredient[] = [];
 
   public recipeIngredients: RecipeIngredient[] = [];
+
   initRecipeIngredients: any[] = [
-    {
-      name: 'id',
-      display: 'Id'
-    },
-    {
-      name: 'name',
-      display: 'Name'
-    }
+    { name: 'id',     display: 'Id' },
+    { name: 'name',   display: 'Name' }
   ];
   displayRecipeIngredients: any[] = this.initRecipeIngredients.map(col => col.name);
 
   public storeSections: StoreSection[] = [];
   initStoreSections: any[] = [
-    {
-      name: 'id',
-      display: 'Id'
-    },
-    {
-      name: 'name',
-      display: 'Name'
-    }
+    { name: 'id',     display: 'Id' },
+    { name: 'name',   display: 'Name' }
   ];
   displayStoreSections: any[] = this.initStoreSections.map(col => col.name);
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {

@@ -11,6 +11,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+//    "strictPropertyInitialization": false, better to add ! after the variable name
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
