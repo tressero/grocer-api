@@ -21,18 +21,23 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from "@angular/material/input";
 import {SelectOverviewExample} from "./components/select-overview-example";
 import {MatSelectModule} from "@angular/material/select";
+import {TableDynamicArrayDataExample} from "./components/table-dynamic-array-data-example";
+import {ConfirmDialogComponent} from "./components/confirm-dialog/confirm-dialog.component";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    ExpansionOverviewExample,
-    AutocompleteExample,
-    SelectOverviewExample
-  ],
+    declarations: [
+        AppComponent,
+        NavMenuComponent,
+        HomeComponent,
+        CounterComponent,
+        FetchDataComponent,
+        ExpansionOverviewExample,
+        AutocompleteExample,
+        SelectOverviewExample,
+        TableDynamicArrayDataExample,
+        ConfirmDialogComponent
+    ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     BrowserAnimationsModule,
@@ -47,7 +52,8 @@ import {MatSelectModule} from "@angular/material/select";
     MatExpansionModule,
     MatAutocompleteModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
