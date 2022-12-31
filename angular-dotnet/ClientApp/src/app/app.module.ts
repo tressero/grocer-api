@@ -19,6 +19,8 @@ import { ExpansionOverviewExample } from "./components/expansion-overview-exampl
 import {AutocompleteExample} from "./components/autocomplete-example";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from "@angular/material/input";
+import {SelectOverviewExample} from "./components/select-overview-example";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {MatInputModule} from "@angular/material/input";
     CounterComponent,
     FetchDataComponent,
     ExpansionOverviewExample,
-    AutocompleteExample
+    AutocompleteExample,
+    SelectOverviewExample
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -43,7 +46,8 @@ import {MatInputModule} from "@angular/material/input";
     MatTableModule,
     MatExpansionModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
