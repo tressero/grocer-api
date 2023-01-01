@@ -27,21 +27,23 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {EditableTableComponent} from "./components/editable-table/editable-table.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {ExpandingRecipe} from "./components/expanding-recipe/expanding-recipe.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    ExpansionOverviewExample,
-    AutocompleteExample,
-    SelectOverviewExample,
-    TableDynamicArrayDataExample,
-    ConfirmDialogComponent,
-    EditableTableComponent
-  ],
+    declarations: [
+        AppComponent,
+        NavMenuComponent,
+        HomeComponent,
+        CounterComponent,
+        FetchDataComponent,
+        ExpansionOverviewExample,
+        AutocompleteExample,
+        SelectOverviewExample,
+        TableDynamicArrayDataExample,
+        ConfirmDialogComponent,
+        EditableTableComponent,
+        ExpandingRecipe
+    ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     BrowserAnimationsModule,
