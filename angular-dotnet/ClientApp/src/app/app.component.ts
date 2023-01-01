@@ -16,6 +16,7 @@ export class AppComponent {
   public recipes: Recipe[] = []
   public ingredients: Ingredient[] = [];
   public recipeIngredients: RecipeIngredient[] = [];
+  public storeSections: StoreSection[] = [];
 
   initRecipeIngredients: any[] = [
     { name: 'id',     display: 'Id' },
@@ -23,7 +24,6 @@ export class AppComponent {
   ];
   displayRecipeIngredients: any[] = this.initRecipeIngredients.map(col => col.name);
 
-  public storeSections: StoreSection[] = [];
   initStoreSections: any[] = [
     { name: 'id',     display: 'Id' },
     { name: 'name',   display: 'Name' }
@@ -47,6 +47,10 @@ export class AppComponent {
     http.get<StoreSection[]>(baseUrl + 'StoreSection').subscribe(
       result => { this.storeSections = result; },
       error => console.error(error));
+
+    // debugger;
+    // let tmp = this.recipeIngredients.map(x => x.)
+
 
   }
 

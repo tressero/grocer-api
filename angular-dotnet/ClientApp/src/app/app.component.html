@@ -2,17 +2,23 @@
 <!--<mat-slide-toggle>Toggle me!</mat-slide-toggle>-->
 
 <!--  <app-nav-menu></app-nav-menu>-->
-<!--  <expansion-overview-example></expansion-overview-example>-->
+  <expansion-overview-example></expansion-overview-example>
 <!--  <autocomplete-example></autocomplete-example>-->
-<!--  <select-overview-example></select-overview-example>-->
+  <select-overview-example></select-overview-example>
 <!--  <table-dynamic-array-data-example></table-dynamic-array-data-example>-->
 <!--  <editable-table></editable-table>-->
-  <app-fetch-data
-    [recipes]="recipes"
-    [ingredients]="ingredients"
-    [recipeIngredients]="recipeIngredients"
-    [storeSections]="storeSections"
-  ></app-fetch-data>
+
+<expanding-recipe
+  *ngFor="let recipe of recipes; index as i;"
+  [recipe]="recipe">
+</expanding-recipe>
+<!--  <app-fetch-data-->
+<!--    [recipes]="recipes"-->
+<!--    [ingredients]="ingredients"-->
+<!--    [recipeIngredients]="recipeIngredients"-->
+<!--    [storeSections]="storeSections"-->
+<!--  ></app-fetch-data>-->
+
 <!--  <h1>App Confirm Dialog</h1>-->
 <!--  <app-confirm-dialog></app-confirm-dialog>-->
 
