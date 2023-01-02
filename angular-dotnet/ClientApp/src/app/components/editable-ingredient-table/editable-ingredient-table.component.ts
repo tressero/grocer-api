@@ -5,6 +5,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 // import { User, UserColumns } from '../../models/user';
 import { IngredientService } from '../../services/ingredient.service';
 import { Ingredient, IngredientColumns } from "../../models/ingredient";
+import {StoreSection} from "../../models/store-section";
 
 @Component({
   selector: 'editable-ingredient-table',
@@ -14,6 +15,7 @@ import { Ingredient, IngredientColumns } from "../../models/ingredient";
 export class EditableIngredientTableComponent {
 
   @Input() ingredients!: Ingredient[];
+  @Input() storeSections!: StoreSection[];
   displayedColumns: string[] = IngredientColumns.map((col) => col.key);
   columnsSchema: any = IngredientColumns;
   dataSource = new MatTableDataSource<Ingredient>();

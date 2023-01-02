@@ -57,4 +57,23 @@ public class IngredientController : ControllerBase
         }
         return ingredientDtos;
     }
+
+    [HttpPost]
+    [Route("[action]")]
+    [ProducesResponseType(typeof(List<IngredientDto>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(CustomResponseObject), (int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(CustomResponseObject), (int)HttpStatusCode.NotFound)]
+    public IActionResult Add(IngredientDto ingredientDto)
+    {
+        if (_unitOfWork.Ingredient.GetById(ingredientDto.Id) == null)
+        {
+            var ingredient = _mapper.Map<Ingredient>(ingredientDto);
+            _unitOfWork.Ingredient.Add(ingredient);
+            return Ok(ingredientDto);
+        }
+        return Conflict("409 conflict - guid already exists.");
+    }
+
+    
+    
 }
