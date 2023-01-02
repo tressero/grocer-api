@@ -32,24 +32,26 @@ import {
     EditableIngredientTableComponent
 } from "./components/editable-ingredient-table/editable-ingredient-table.component";
 import {MatNativeDateModule} from '@angular/material/core';
+import {AutocompleteComponent} from "./components/autocomplete/autocomplete.component";
 
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavMenuComponent,
-        HomeComponent,
-        CounterComponent,
-        FetchDataComponent,
-        ExpansionOverviewExample,
-        AutocompleteExample,
-        SelectOverviewExample,
-        TableDynamicArrayDataExample,
-        ConfirmDialogComponent,
-        EditableTableComponent,
-        ExpandingRecipe,
-        EditableIngredientTableComponent
-    ],
+  declarations: [
+    AppComponent,
+    NavMenuComponent,
+    HomeComponent,
+    CounterComponent,
+    FetchDataComponent,
+    ExpansionOverviewExample,
+    AutocompleteExample,
+    SelectOverviewExample,
+    TableDynamicArrayDataExample,
+    ConfirmDialogComponent,
+    EditableTableComponent,
+    ExpandingRecipe,
+    EditableIngredientTableComponent,
+    AutocompleteComponent
+  ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     BrowserAnimationsModule,

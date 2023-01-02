@@ -31,7 +31,7 @@ export const IngredientColumns = [
   },
   {
     key: 'storeSectionId',
-    type: 'text',
+    type: 'selector',
     label: 'StoreSectionId',
     required: true,
   },
