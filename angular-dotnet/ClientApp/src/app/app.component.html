@@ -2,16 +2,18 @@
 <!--<mat-slide-toggle>Toggle me!</mat-slide-toggle>-->
 
 <!--  <app-nav-menu></app-nav-menu>-->
-  <expansion-overview-example></expansion-overview-example>
+  <editable-ingredient-table [ingredients]="ingredients">        </editable-ingredient-table>
+<!--  <expansion-overview-example></expansion-overview-example>-->
 <!--  <autocomplete-example></autocomplete-example>-->
-  <select-overview-example></select-overview-example>
+<!--  <select-overview-example></select-overview-example>-->
 <!--  <table-dynamic-array-data-example></table-dynamic-array-data-example>-->
-<!--  <editable-table></editable-table>-->
+  <editable-table></editable-table>
 
-<expanding-recipe
-  *ngFor="let recipe of recipes; index as i;"
-  [recipe]="recipe">
-</expanding-recipe>
+  <expanding-recipe
+    *ngFor="let recipe of recipes; index as i;"
+    [recipe]="recipe">
+  </expanding-recipe>
+
 <!--  <app-fetch-data-->
 <!--    [recipes]="recipes"-->
 <!--    [ingredients]="ingredients"-->
