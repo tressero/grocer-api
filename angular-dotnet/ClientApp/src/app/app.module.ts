@@ -28,6 +28,9 @@ import {EditableTableComponent} from "./components/editable-table/editable-table
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {ExpandingRecipe} from "./components/expanding-recipe/expanding-recipe.component";
+import {
+    EditableIngredientTableComponent
+} from "./components/editable-ingredient-table/editable-ingredient-table.component";
 
 @NgModule({
     declarations: [
@@ -42,7 +45,8 @@ import {ExpandingRecipe} from "./components/expanding-recipe/expanding-recipe.co
         TableDynamicArrayDataExample,
         ConfirmDialogComponent,
         EditableTableComponent,
-        ExpandingRecipe
+        ExpandingRecipe,
+        EditableIngredientTableComponent
     ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
