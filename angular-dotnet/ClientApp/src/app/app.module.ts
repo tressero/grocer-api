@@ -31,6 +31,8 @@ import {ExpandingRecipe} from "./components/expanding-recipe/expanding-recipe.co
 import {
     EditableIngredientTableComponent
 } from "./components/editable-ingredient-table/editable-ingredient-table.component";
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 @NgModule({
     declarations: [
@@ -65,8 +67,9 @@ import {
     MatSelectModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatCheckboxModule
-  ],
+    MatCheckboxModule,
+    MatNativeDateModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })
