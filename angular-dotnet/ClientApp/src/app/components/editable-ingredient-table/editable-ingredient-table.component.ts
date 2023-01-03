@@ -29,18 +29,20 @@ export class EditableIngredientTableComponent {
     });
   }
 
+  // TODO - return from update ingredient should maybe set the ingredientColumns part ??? see Users item
   editRow(row: Ingredient) {
-    if (row.id.startsWith('00000')) {
+    if (row.id === "") {
+      row.id = crypto.randomUUID();
       this.ingredientService.addIngredient(row).subscribe((newIngredient: Ingredient) => {
         row.id = newIngredient.id;
         // row.isEdit = false;
       });
     }
-    // else {
-    //   this.ingredientService.updateIngredient(row).subscribe(
-    //     () => (row.isEdit = false)
-    //   );
-    // }
+    else {
+      this.ingredientService.updateIngredient(row).subscribe(
+        () => (row.isEdit = false)
+      );
+    }
   }
 
   addRow() {
@@ -49,7 +51,8 @@ export class EditableIngredientTableComponent {
       name: "",
       description: "",
       unit: "",
-      storeSectionId: ""
+      storeSectionId: "00000000-0000-0000-0000-000000000000",
+      isEdit: true
     };
     this.dataSource.data = [newRow, ...this.dataSource.data];
   }

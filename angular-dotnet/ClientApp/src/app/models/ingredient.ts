@@ -4,6 +4,7 @@ export interface Ingredient {
   description: string;
   unit: string;
   storeSectionId: string;
+  isEdit: boolean;
 }
 
 export const IngredientColumns = [

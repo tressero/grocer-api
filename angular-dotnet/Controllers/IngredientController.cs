@@ -58,6 +58,26 @@ public class IngredientController : ControllerBase
         return ingredientDtos;
     }
 
+    [HttpPatch]
+    [Route("[action]")]
+    [Route("[action]/{id}")]
+    [ProducesResponseType(typeof(List<IngredientDto>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(CustomResponseObject), (int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(CustomResponseObject), (int)HttpStatusCode.NotFound)]
+    public IActionResult Update(IngredientDto ingredientDto)
+    {
+        var ingredient = _unitOfWork.Ingredient.GetById(ingredientDto.Id);
+        _mapper.Map(ingredientDto, ingredient);
+        try
+        {
+            _unitOfWork.Save();
+            return Ok(ingredientDto);
+        }
+        catch (Exception ex)
+        {
+            return UnprocessableEntity(ex);
+        }
+    }
     [HttpPost]
     [Route("[action]")]
     [ProducesResponseType(typeof(List<IngredientDto>), (int)HttpStatusCode.OK)]
@@ -68,8 +88,8 @@ public class IngredientController : ControllerBase
         if (_unitOfWork.Ingredient.GetById(ingredientDto.Id) == null)
         {
             var ingredient = _mapper.Map<Ingredient>(ingredientDto);
-            _unitOfWork.Ingredient.Add(ingredient);
-            return Ok(ingredientDto);
+            var entity = _unitOfWork.Ingredient.Add(ingredient);
+            return Ok(_mapper.Map<IngredientDto>(entity));
         }
         return Conflict("409 conflict - guid already exists.");
     }
