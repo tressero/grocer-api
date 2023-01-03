@@ -26,7 +26,7 @@ export class IngredientService {
   }
 
   updateIngredient(ingredient: Ingredient): Observable<Ingredient> {
-    return this.http.patch<Ingredient>(`${this.serviceUrl}/${ingredient.id}`, ingredient);
+    return this.http.patch<Ingredient>(`${this.serviceUrl}/update/${ingredient.id}`, ingredient);
   }
 
   addIngredient(ingredient: Ingredient): Observable<Ingredient> {
@@ -34,7 +34,7 @@ export class IngredientService {
   }
 
   deleteIngredient(id: string): Observable<Ingredient> {
-    return this.http.delete<Ingredient>(`${this.serviceUrl}/${id}`);
+    return this.http.delete<Ingredient>(`${this.serviceUrl}/delete/${id}`);
   }
 
   deleteIngredients(ingredients: Ingredient[]): Observable<Ingredient[]> {

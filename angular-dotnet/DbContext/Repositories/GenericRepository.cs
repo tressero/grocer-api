@@ -10,8 +10,12 @@ public class GenericRepository < T > : IGenericRepository < T > where T: class {
     public GenericRepository(GrocerContext context) {
         this.context = context;
     }
-    public void Add(T entity) {
-        context.Set < T > ().Add(entity);
+    // public void Add(T entity) {
+    //     context.Set < T > ().Add(entity);
+    // }
+    public T Add(T entity) {
+        var sEntityEntry = context.Set < T > ().Add(entity);
+        return sEntityEntry.Entity;
     }
     public void AddRange(IEnumerable < T > entities) {
         context.Set < T > ().AddRange(entities);
