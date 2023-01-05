@@ -33,6 +33,7 @@ import {
 } from "./components/editable-ingredient-table/editable-ingredient-table.component";
 import {MatNativeDateModule} from '@angular/material/core';
 import {AutocompleteComponent} from "./components/autocomplete/autocomplete.component";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -52,26 +53,27 @@ import {AutocompleteComponent} from "./components/autocomplete/autocomplete.comp
     EditableIngredientTableComponent,
     AutocompleteComponent
   ],
-  imports: [
-    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'counter', component: CounterComponent},
-      {path: 'fetch-data', component: FetchDataComponent},
-    ]),
-    MatTableModule,
-    MatExpansionModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatSelectModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatCheckboxModule,
-    MatNativeDateModule
-],
+    imports: [
+        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'},
+            {path: 'counter', component: CounterComponent},
+            {path: 'fetch-data', component: FetchDataComponent},
+        ]),
+        MatTableModule,
+        MatExpansionModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatCheckboxModule,
+        MatNativeDateModule,
+        MatButtonModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
