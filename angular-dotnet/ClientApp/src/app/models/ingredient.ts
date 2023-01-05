@@ -5,6 +5,7 @@ export interface Ingredient {
   unit: string;
   storeSectionId: string;
   isEdit: boolean;
+  isNew: boolean;
 }
 
 export const IngredientColumns = [

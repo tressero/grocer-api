@@ -66,6 +66,15 @@ public class IngredientController : ControllerBase
     [ProducesResponseType(typeof(CustomResponseObject), (int)HttpStatusCode.NotFound)]
     public IActionResult Update(IngredientDto ingredientDto)
     {
+        var ingredientToUpdate = _unitOfWork.Ingredient.GetById(ingredientDto.Id);
+        if (ingredientToUpdate != null)
+        {
+            var newIngredient = _mapper.Map(ingredientDto, ingredientToUpdate);
+            _unitOfWork.Save();
+            return Ok(_mapper.Map(ingredientToUpdate, ingredientDto)); // Return whatever is in the DB
+        }
+        return Conflict("409 conflict - guid doesn't exist.");
+        
         var ingredient = _unitOfWork.Ingredient.GetById(ingredientDto.Id);
         _mapper.Map(ingredientDto, ingredient);
         try
@@ -89,6 +98,7 @@ public class IngredientController : ControllerBase
         {
             var ingredient = _mapper.Map<Ingredient>(ingredientDto);
             var entity = _unitOfWork.Ingredient.Add(ingredient);
+            _unitOfWork.Save();
             return Ok(_mapper.Map<IngredientDto>(entity));
         }
         return Conflict("409 conflict - guid already exists.");

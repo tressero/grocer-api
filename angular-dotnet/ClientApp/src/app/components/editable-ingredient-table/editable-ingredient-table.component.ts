@@ -31,14 +31,19 @@ export class EditableIngredientTableComponent {
 
   // TODO - return from update ingredient should maybe set the ingredientColumns part ??? see Users item
   editRow(row: Ingredient) {
-    if (row.id === "") {
-      row.id = crypto.randomUUID();
+    if (row.isNew) {
+      debugger;
       this.ingredientService.addIngredient(row).subscribe((newIngredient: Ingredient) => {
         row.id = newIngredient.id;
-        // row.isEdit = false;
+        row.name = newIngredient.name;
+        row.description = newIngredient.description;
+        row.storeSectionId = newIngredient.storeSectionId;
+        row.isEdit = false;
+        row.isNew = false;
       });
     }
     else {
+      debugger;
       this.ingredientService.updateIngredient(row).subscribe(
         () => (row.isEdit = false)
       );
@@ -46,13 +51,15 @@ export class EditableIngredientTableComponent {
   }
 
   addRow() {
+    debugger;
     const newRow: Ingredient = {
-      id: "",
+      id: crypto.randomUUID(),
       name: "",
       description: "",
       unit: "",
       storeSectionId: "00000000-0000-0000-0000-000000000000",
-      isEdit: true
+      isEdit: true,
+      isNew: true
     };
     this.dataSource.data = [newRow, ...this.dataSource.data];
   }
@@ -89,7 +96,10 @@ export class EditableIngredientTableComponent {
   }
 
   disableSubmit(id: number) {
+    return false;
+    // TODO - add validation back I guess?
     if (this.valid[id]) {
+      debugger;
       return Object.values(this.valid[id]).some((item) => item === false);
     }
     return false;
