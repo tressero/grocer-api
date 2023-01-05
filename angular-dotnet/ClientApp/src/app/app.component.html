@@ -2,7 +2,11 @@
 <!--<mat-slide-toggle>Toggle me!</mat-slide-toggle>-->
 
 <!--  <app-nav-menu></app-nav-menu>-->
-  <editable-ingredient-table [ingredients]="ingredients" [storeSections]="storeSections">        </editable-ingredient-table>
+  <h2>Individual Ingredients</h2>
+  <editable-ingredient-table
+    [ingredients]="ingredients" [storeSections]="storeSections">
+  </editable-ingredient-table>
+
 <!--  <expansion-overview-example></expansion-overview-example>-->
   <autocomplete-example></autocomplete-example>
   <select-overview-example></select-overview-example>
@@ -11,7 +15,10 @@
 
   <expanding-recipe
     *ngFor="let recipe of recipes; index as i;"
-    [recipe]="recipe">
+    [recipe]="recipe"
+    [recipeIngredients]="recipeIngredients"
+    [ingredients]="ingredients"
+    >
   </expanding-recipe>
 
 <!--  <app-fetch-data-->
