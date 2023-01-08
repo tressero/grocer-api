@@ -7,19 +7,26 @@
     [ingredients]="ingredients" [storeSections]="storeSections">
   </editable-ingredient-table>
 
-<!--  <expansion-overview-example></expansion-overview-example>-->
-  <autocomplete-example></autocomplete-example>
-  <select-overview-example></select-overview-example>
-<!--  <table-dynamic-array-data-example></table-dynamic-array-data-example>-->
-  <editable-table></editable-table>
+  <h2>Expanding Recipes</h2>
 
   <expanding-recipe
     *ngFor="let recipe of recipes; index as i;"
     [recipe]="recipe"
     [recipeIngredients]="recipeIngredients"
     [ingredients]="ingredients"
-    >
+  >
   </expanding-recipe>
+
+  <!--  <expansion-overview-example></expansion-overview-example>-->
+  <h2>Autcomplete Example</h2>
+
+  <autocomplete-example></autocomplete-example>
+  <h2>Select Overview Example</h2>
+
+  <select-overview-example></select-overview-example>
+  <!--  <table-dynamic-array-data-example></table-dynamic-array-data-example>-->
+  <h2>Editable Table</h2>
+  <editable-table></editable-table>
 
 <!--  <app-fetch-data-->
 <!--    [recipes]="recipes"-->

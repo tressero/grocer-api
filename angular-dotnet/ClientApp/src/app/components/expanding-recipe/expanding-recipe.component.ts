@@ -4,7 +4,28 @@ import {Ingredient} from "../../models/ingredient";
 import {RecipeIngredient} from "../../models/recipe-ingredient";
 import {StoreSection} from "../../models/store-section";
 import {DisplayedRecipeIngredient} from "../../models/displayed-recipe-ingredient";
+import {IngredientMap} from "../../models/ingredient-map";
 
+function ingredientMapToList(ingredientMap: IngredientMap) : Ingredient[] {
+  // NOTE THIS IS NEVER USED -
+  let ingredients : Ingredient[] = [{
+    id: crypto.randomUUID(),
+    name: "",
+    description: "",
+    unit: "",
+    storeSectionId: "00000000-0000-0000-0000-000000000000",
+    isEdit: true,
+    isNew: true
+  }];
+  return ingredients;
+}
+function ingredientListToMap(ingredients: Ingredient[]) : IngredientMap {
+  let ingredientMap: IngredientMap = {};
+  for (let i of ingredients) {
+    ingredientMap[i.id] = i;
+  }
+  return ingredientMap;
+}
 /**
  * @title Basic expansion panel
  */
@@ -19,33 +40,32 @@ export class ExpandingRecipe {
   @Input()
   get recipeIngredients(): RecipeIngredient[] { return this._recipeIngredients; }
   set recipeIngredients(recipeIngredients: RecipeIngredient[]) {
-    let tmp = recipeIngredients.filter(ri => ri.recipeId === this.recipe.id);
-    console.log('tmp',tmp);
-    for (let ri of tmp) {
-      let ingredient = this.ingredients.find(i => i.id === ri.ingredientId);
-      console.log('ingredient',ingredient);
-      // @ts-ignore
-      let newRi: DisplayedRecipeIngredient = {
-        recipeId: this.recipe.id,
-        ingredientCount: ri.ingredientCount,
-        ingredientId: ri.ingredientId,
-        ingredientName: ingredient?.name ?? "",
-        ingredientUnit: ingredient?.unit ?? "",
-        ingredientDescription: ingredient?.description ?? ""
-      };
-      this.displayedRecipeIngredients.push(newRi);
-    }
-    console.log('displayedRecipeIngredients',this.displayedRecipeIngredients);
+    this._recipeIngredients = recipeIngredients.filter(ri => ri.recipeId === this.recipe.id);
+    // for (let ri of tmp) {
+    //   let ingredient = this.ingredients.find(i => i.id === ri.ingredientId);
+    //   console.log('ingredient',ingredient);
+    //   // @ts-ignore
+    // }
   }
-  private _recipeIngredients!: RecipeIngredient[];
+  _recipeIngredients!: RecipeIngredient[];
 
-  @Input() ingredients!: Ingredient[];
+  @Input()
+  get ingredients(): Ingredient[] { return ingredientMapToList(this._ingredientMap); }
+  set ingredients(ingredients: Ingredient[]) {
+    let ingredientMap = ingredientListToMap(ingredients);
+    console.log('ingredientMap',ingredientMap);
+    this._ingredientMap = ingredientMap;
+  }
+  _ingredientMap!: IngredientMap;
 
-  displayedRecipeIngredients: DisplayedRecipeIngredient[] = [];
+  // displayedRecipeIngredients: DisplayedRecipeIngredient[] = [];
 
   ngOnInit() {
     /* can't set displayedREcipeIngredients here because ti doesn't seem to capture them*/
+
   }
+
+
 
 }
 
