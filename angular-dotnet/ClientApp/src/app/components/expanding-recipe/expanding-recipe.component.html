@@ -7,19 +7,25 @@
       </mat-panel-title>
       <mat-panel-description>
         <a href="{{ recipe.url }}">Link</a>
-        <table *ngFor="let dri of displayedRecipeIngredients" class="mat-elevation-z8 demo-table">
-          <tr>
-            <!-- ingredientName (ref via ingredientId) - selectable/editable -->
-            <!-- ingredientDesc (ref via above obj) -->
-            <!-- ingredientUnit (ref via above obj) -->
-            <!-- ingredientCount - editable -->
-            <!-- recipeId - fixed -->
-            <td>
-            </td>
-          </tr>
-        </table>
+
       </mat-panel-description>
     </mat-expansion-panel-header>
-    something
+    <table  class="mat-elevation-z8 demo-table">
+      <tr>
+        <th>Ingredient</th>
+        <th>Description</th>
+        <th>Count</th>
+      </tr>
+      <tr *ngFor="let ri of _recipeIngredients">
+        <!-- ingredientName (ref via ingredientId) - selectable/editable -->
+        <!-- ingredientDesc (ref via above obj) -->
+        <!-- ingredientUnit (ref via above obj) -->
+        <!-- ingredientCount - editable -->
+        <!-- recipeId - fixed -->
+        <td>{{_ingredientMap[ri.ingredientId].name}}</td>
+        <td>{{_ingredientMap[ri.ingredientId].description}}</td>
+        <td>{{ri.ingredientCount}}</td>
+      </tr>
+    </table>
   </mat-expansion-panel>
 </mat-accordion>

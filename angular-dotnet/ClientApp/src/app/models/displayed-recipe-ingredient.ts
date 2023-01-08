@@ -1,13 +1,18 @@
+import {Ingredient} from "./ingredient";
+import {Recipe} from "./recipe";
+
 
 export interface DisplayedRecipeIngredient {
-  ingredientCount: string;
+  [ingredientId: string] : Ingredient;
+  // [recipeId: string] : Recipe;
 
-  recipeId: string;
-
-  ingredientId: string;
-  ingredientName: string;
-  ingredientDescription: string;
-  ingredientUnit: string;
+  // ingredientCount: number;
+  //
+  // recipeId: string;
+  //
+  // ingredientName: string;
+  // ingredientDescription: string;
+  // ingredientUnit: string;
 
   // storeLocationId: string;
   // storeLocationName: string;
