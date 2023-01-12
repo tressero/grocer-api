@@ -50,12 +50,16 @@ export class ExpandingRecipe {
   _recipeIngredients!: RecipeIngredient[];
 
   @Input()
-  get ingredients(): Ingredient[] { return ingredientMapToList(this._ingredientMap); }
+  get ingredients(): Ingredient[] { return this._ingredients; }
   set ingredients(ingredients: Ingredient[]) {
+    this._ingredients = ingredients;
+
     let ingredientMap = ingredientListToMap(ingredients);
     console.log('ingredientMap',ingredientMap);
     this._ingredientMap = ingredientMap;
   }
+
+  _ingredients!: Ingredient[];
   _ingredientMap!: IngredientMap;
 
   // displayedRecipeIngredients: DisplayedRecipeIngredient[] = [];
@@ -66,7 +70,20 @@ export class ExpandingRecipe {
   }
 
 
+  addRow() {
+    console.log('expanding-recipe.component.ts addRow(')
+    recipeIngredientService
+  }
 
+  removeRow(ri: RecipeIngredient) {
+    console.log('expanding-recipe.component.ts removeRow(',ri);
+
+  }
+
+  updateCount(ri: RecipeIngredient) {
+    console.log('expanding-recipe.component.ts updateCount(',ri);
+
+  }
 }
 
 
