@@ -11,20 +11,57 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <table  class="mat-elevation-z8 demo-table">
-      <tr>
-        <th>Ingredient</th>
-        <th>Description</th>
-        <th>Count</th>
+      <thead>
+      <tr class="mat-header-row">
+        <th class="mat-header-cell">Ingredient</th>
+        <!--        <th>Description</th>-->
+        <th class="mat-header-cell">Count</th>
+<!--        <th class="mat-header-cell">Unit</th>-->
+        <th class="mat-hedaer-cell">
+          <button class="button-add-row" mat-button (click)="addRow()">
+            Add
+          </button>
+        </th>
       </tr>
-      <tr *ngFor="let ri of _recipeIngredients">
+      </thead>
+
+      <tr *ngFor="let ri of _recipeIngredients" class="mat-row">
         <!-- ingredientName (ref via ingredientId) - selectable/editable -->
         <!-- ingredientDesc (ref via above obj) -->
         <!-- ingredientUnit (ref via above obj) -->
         <!-- ingredientCount - editable -->
         <!-- recipeId - fixed -->
-        <td>{{_ingredientMap[ri.ingredientId].name}}</td>
-        <td>{{_ingredientMap[ri.ingredientId].description}}</td>
-        <td>{{ri.ingredientCount}}</td>
+        <td class="mat-cell">
+<!--        <td >{{_ingredientMap[ri.ingredientId].name}}</td> &lt;!&ndash; ingredient id is editable &ndash;&gt;-->
+          <mat-select [(value)]="ri.ingredientId">
+            <mat-option *ngFor="let i of ingredients" [value]="i.id">{{ i.name }} [{{ i.unit }}]</mat-option>
+          </mat-select>
+        </td>
+<!--        <td class="mat-cell">{{_ingredientMap[ri.ingredientId].description}}</td>-->
+        <td class="mat-cell">
+<!--          {{ri.ingredientCount}}-->
+            <input
+              matInput
+              type="number"
+              id="myNumber"
+              [(ngModel)]="ri.ingredientCount"
+              (ngModelChange)="updateCount(ri)"
+            />
+        </td>
+<!--        <mat-form-field class="example-full-width">-->
+<!--          <mat-label>Postal Code</mat-label>-->
+<!--          <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" value="94043">-->
+<!--          <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>-->
+<!--        </mat-form-field>-->
+
+<!--        <td class="mat-cell">{{_ingredientMap[ri.ingredientId].unit}}</td>-->
+        <td class="mat-cell">
+          <button class="button-remove-rows"
+                  mat-button
+                  (click)="removeRow(ri)">
+            Remove
+          </button>
+        </td>
       </tr>
     </table>
   </mat-expansion-panel>
