@@ -72,7 +72,7 @@ export class ExpandingRecipe {
 
   addRow() {
     console.log('expanding-recipe.component.ts addRow(')
-    recipeIngredientService
+    // recipeIngredientService
   }
 
   removeRow(ri: RecipeIngredient) {
