@@ -46,4 +46,39 @@ public class RecipeIngredientController : ControllerBase
         var recipeIngredientDtos = recipeIngredientJunctions.ProjectTo<RecipeIngredientDto>(_mapper.ConfigurationProvider);
         return recipeIngredientDtos;
     }
+    
+    [HttpPost]
+    [Route("[action]")]
+    [Route("[action]/{recipeId}/{ingredientId}")]
+    public IEnumerable<RecipeIngredientDto> AddOrUpdate(string recipeId, string ingredientId, RecipeIngredientDto recipeIngredientDto)
+    {
+        var recipeIngredientJunctions = _unitOfWork.RecipeIngredient.GetAll().AsQueryable();
+        var recipeIngredientDtos = recipeIngredientJunctions.ProjectTo<RecipeIngredientDto>(_mapper.ConfigurationProvider);
+        return recipeIngredientDtos;
+    }
+    [HttpPost]
+    [Route("[action]/{recipeId}/{ingredientId}")]
+    public IActionResult Delete(string recipeId, string ingredientId)
+    {
+        // Guid recipeGuid;
+        // Guid ingredientGuid;
+        if (Guid.TryParse(recipeId, out Guid recipeGuid) && Guid.TryParse(ingredientId, out Guid ingredientGuid))
+        {
+            var recipeIngredient = _unitOfWork.RecipeIngredient.GetAll()
+                .FirstOrDefault(x => x.RecipeId == recipeGuid && x.IngredientId == ingredientGuid);
+            if (recipeIngredient != null)
+            {
+                _unitOfWork.RecipeIngredient.Remove(recipeIngredient);
+                return Ok();            
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
 }
