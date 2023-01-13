@@ -5,6 +5,9 @@ import {RecipeIngredient} from "../../models/recipe-ingredient";
 import {StoreSection} from "../../models/store-section";
 import {DisplayedRecipeIngredient} from "../../models/displayed-recipe-ingredient";
 import {IngredientMap} from "../../models/ingredient-map";
+import {RecipeIngredientService} from "../../services/recipe-ingredient.service";
+import {MatDialog} from "@angular/material/dialog";
+import {IngredientService} from "../../services/ingredient.service";
 
 function ingredientMapToList(ingredientMap: IngredientMap) : Ingredient[] {
   // NOTE THIS IS NEVER USED -
@@ -64,6 +67,7 @@ export class ExpandingRecipe {
 
   // displayedRecipeIngredients: DisplayedRecipeIngredient[] = [];
 
+  constructor(private recipeIngredientService: RecipeIngredientService) {}
   ngOnInit() {
     /* can't set displayedREcipeIngredients here because ti doesn't seem to capture them*/
 
@@ -72,17 +76,26 @@ export class ExpandingRecipe {
 
   addRow() {
     console.log('expanding-recipe.component.ts addRow(')
-    // recipeIngredientService
+    const newRecipeIngredient: RecipeIngredient = {
+      recipeId: this.recipe.id,
+      ingredientId: "00000000-0000-0000-0000-000000000000",
+      ingredientCount: 0
+    };
+    this.recipeIngredients.push(newRecipeIngredient);
   }
 
   removeRow(ri: RecipeIngredient) {
     console.log('expanding-recipe.component.ts removeRow(',ri);
-
+    this.recipeIngredientService.delete(ri.recipeId, ri.ingredientId).subscribe(() => {
+      this.recipeIngredients = this.recipeIngredients.filter(
+        (u: RecipeIngredient) => u.recipeId !== ri.recipeId && u.ingredientId !== ri.ingredientId
+      );
+    });
   }
-
-  updateCount(ri: RecipeIngredient) {
+  addOrUpdateRow(ri: RecipeIngredient) {
     console.log('expanding-recipe.component.ts updateCount(',ri);
-
+    this.recipeIngredientService.addOrUpdate(ri);
+    console.log('addOrUpdateRow succeededed.... BUT WARNING WE DO NOT CHECK!!');
   }
 }
 

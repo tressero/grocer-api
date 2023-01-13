@@ -33,7 +33,8 @@
         <!-- recipeId - fixed -->
         <td class="mat-cell">
 <!--        <td >{{_ingredientMap[ri.ingredientId].name}}</td> &lt;!&ndash; ingredient id is editable &ndash;&gt;-->
-          <mat-select [(value)]="ri.ingredientId">
+          <mat-select [(value)]="ri.ingredientId"
+                      (selectionChange)="addOrUpdateRow(ri)">
             <mat-option *ngFor="let i of ingredients" [value]="i.id">{{ i.name }} [{{ i.unit }}]</mat-option>
           </mat-select>
         </td>
@@ -45,7 +46,7 @@
               type="number"
               id="myNumber"
               [(ngModel)]="ri.ingredientCount"
-              (ngModelChange)="updateCount(ri)"
+              (ngModelChange)="addOrUpdateRow(ri)"
             />
         </td>
 <!--        <mat-form-field class="example-full-width">-->
