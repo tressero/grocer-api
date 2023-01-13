@@ -103,6 +103,17 @@ public class IngredientController : ControllerBase
         }
         return Conflict("409 conflict - guid already exists.");
     }
+    [HttpPost]
+    [Route("[action]/{ingredientId}")]
+    [ProducesResponseType(typeof(List<IngredientDto>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(CustomResponseObject), (int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(CustomResponseObject), (int)HttpStatusCode.NotFound)]
+    public IActionResult Delete(Guid ingredientId)
+    {
+        if (ingredientId != Guid.Empty)
+            throw new NotImplementedException();
+        return BadRequest("Invalid or Empty Guid");
+    }
 
     
     

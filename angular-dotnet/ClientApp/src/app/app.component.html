@@ -7,7 +7,11 @@
     [ingredients]="ingredients" [storeSections]="storeSections">
   </editable-ingredient-table>
 
-
+<button class="button-remove-rows"
+        mat-button
+        (click)="addRecipe()">
+  New Recipe
+</button>
   <h2>Expanding Recipes</h2>
   <expanding-recipe
     *ngFor="let recipe of recipes; index as i;"

@@ -55,4 +55,7 @@ export class AppComponent {
   }
 
 
+  addRecipe() {
+    console.log('appComponent.addRecipe(');
+  }
 }
