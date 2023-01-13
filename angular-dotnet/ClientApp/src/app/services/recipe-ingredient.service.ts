@@ -11,7 +11,7 @@ import {StoreSection} from "../models/store-section";
 @Injectable({
   providedIn: 'root',
 })
-export class IngredientService {
+export class RecipeIngredientService {
   private serviceUrl = '';
 
   constructor(private http: HttpClient, @Inject('BASE_URL') serviceUrl: string) {
@@ -25,10 +25,7 @@ export class IngredientService {
       .pipe<RecipeIngredient[]>(map((data: any) => data));
   }
 
-  add(recipeIngredient: RecipeIngredient): Observable<Ingredient> {
-    return this.http.post<Ingredient>(`${this.serviceUrl}/addOrUpdate`, recipeIngredient);
-  }
-  update(recipeIngredient: RecipeIngredient): Observable<RecipeIngredient> {
+  addOrUpdate(recipeIngredient: RecipeIngredient): Observable<RecipeIngredient> {
     return this.http.post<RecipeIngredient>(`${this.serviceUrl}/addOrUpdate`, recipeIngredient);
   }
 

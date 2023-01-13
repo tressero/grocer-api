@@ -49,12 +49,9 @@ public class RecipeIngredientController : ControllerBase
     
     [HttpPost]
     [Route("[action]")]
-    [Route("[action]/{recipeId}/{ingredientId}")]
-    public IEnumerable<RecipeIngredientDto> AddOrUpdate(string recipeId, string ingredientId, RecipeIngredientDto recipeIngredientDto)
+    public IEnumerable<RecipeIngredientDto> AddOrUpdate(RecipeIngredientDto recipeIngredientDto)
     {
-        var recipeIngredientJunctions = _unitOfWork.RecipeIngredient.GetAll().AsQueryable();
-        var recipeIngredientDtos = recipeIngredientJunctions.ProjectTo<RecipeIngredientDto>(_mapper.ConfigurationProvider);
-        return recipeIngredientDtos;
+        throw new NotImplementedException();
     }
     [HttpPost]
     [Route("[action]/{recipeId}/{ingredientId}")]
