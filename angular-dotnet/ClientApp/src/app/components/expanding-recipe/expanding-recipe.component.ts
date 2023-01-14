@@ -94,8 +94,9 @@ export class ExpandingRecipe {
   }
   addOrUpdateRow(ri: RecipeIngredient) {
     console.log('expanding-recipe.component.ts updateCount(',ri);
-    this.recipeIngredientService.addOrUpdate(ri);
-    console.log('addOrUpdateRow succeededed.... BUT WARNING WE DO NOT CHECK!!');
+    this.recipeIngredientService.addOrUpdate(ri).subscribe((response) => {
+      console.log('addOrUpdateRow succeededed.... BUT WARNING WE DO NOT CHECK Response:',response);
+    });
   }
 }
 

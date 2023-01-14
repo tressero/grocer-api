@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import {Ingredient} from '../models/ingredient';
 import {Recipe} from "../models/recipe";
-import {Recipe} from "../models/recipe-ingredient";
+import {RecipeIngredient} from "../models/recipe-ingredient";
 import {StoreSection} from "../models/store-section";
 
 @Injectable({
@@ -29,8 +29,8 @@ export class RecipeService {
     return this.http.post<Recipe>(`${this.serviceUrl}/addOrUpdate`, recipe);
   }
 
-  delete(recipe: Recipe): Observable<Ingredient> {
-    return this.http.delete<Ingredient>(`${this.serviceUrl}/delete/${recipe.id}/`);
+  delete(recipe: Recipe): Observable<Recipe> {
+    return this.http.delete<Recipe>(`${this.serviceUrl}/delete/${recipe.id}/`);
   }
 
 }

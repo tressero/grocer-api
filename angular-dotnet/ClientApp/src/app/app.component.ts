@@ -5,6 +5,8 @@ import {Ingredient} from "./models/ingredient";
 import {Recipe} from "./models/recipe";
 import {RecipeIngredient} from "./models/recipe-ingredient";
 import {StoreSection} from "./models/store-section";
+import {RecipeIngredientService} from "./services/recipe-ingredient.service";
+import {RecipeService} from "./services/recipe.service";
 
 @Component({
   selector: 'app-root',
@@ -30,7 +32,9 @@ export class AppComponent {
   ];
   displayStoreSections: any[] = this.initStoreSections.map(col => col.name);
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(http: HttpClient,
+              @Inject('BASE_URL') baseUrl: string,
+              private recipeService: RecipeService) {
 
     http.get<Recipe[]>(baseUrl + 'Recipe').subscribe(
       result => { this.recipes = result; },
@@ -57,5 +61,13 @@ export class AppComponent {
 
   addRecipe() {
     console.log('appComponent.addRecipe(');
+    let newRecipe: Recipe = {
+      id: crypto.randomUUID(),
+      name: "",
+      url: ""
+    }
+    this.recipeService.addOrUpdate(newRecipe).subscribe(() => {
+      this.recipes.push(newRecipe);
+    });
   }
 }
