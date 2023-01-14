@@ -49,16 +49,28 @@ public class RecipeIngredientController : ControllerBase
     
     [HttpPost]
     [Route("[action]")]
-    public IEnumerable<RecipeIngredientDto> AddOrUpdate(RecipeIngredientDto recipeIngredientDto)
+    public ActionResult<RecipeIngredientDto> AddOrUpdate(RecipeIngredientDto recipeIngredientDto)
     {
-        throw new NotImplementedException();
+        var recipeIngredientToUpdate = _unitOfWork.RecipeIngredient.GetAll()
+            .FirstOrDefault(x => 
+                x.RecipeId == recipeIngredientDto.RecipeId && x.IngredientId == recipeIngredientDto.IngredientId);
+        RecipeIngredientJunction? responseRecipeIngredient;
+        if (recipeIngredientToUpdate == null)
+        {
+            var recipeIngredient = _mapper.Map<RecipeIngredientJunction>(recipeIngredientDto);
+            responseRecipeIngredient = _unitOfWork.RecipeIngredient.Add(recipeIngredient);
+        }
+        else
+        {
+            responseRecipeIngredient = _mapper.Map(recipeIngredientDto, recipeIngredientToUpdate);
+        }
+        _unitOfWork.Save();
+        return Ok(_mapper.Map<RecipeIngredientDto>(responseRecipeIngredient));
     }
     [HttpPost]
     [Route("[action]/{recipeId}/{ingredientId}")]
     public IActionResult Delete(string recipeId, string ingredientId)
     {
-        // Guid recipeGuid;
-        // Guid ingredientGuid;
         if (Guid.TryParse(recipeId, out Guid recipeGuid) && Guid.TryParse(ingredientId, out Guid ingredientGuid))
         {
             var recipeIngredient = _unitOfWork.RecipeIngredient.GetAll()
