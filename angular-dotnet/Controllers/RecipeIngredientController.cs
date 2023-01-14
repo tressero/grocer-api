@@ -67,9 +67,9 @@ public class RecipeIngredientController : ControllerBase
         _unitOfWork.Save();
         return Ok(_mapper.Map<RecipeIngredientDto>(responseRecipeIngredient));
     }
-    [HttpPost]
+    [HttpDelete]
     [Route("[action]/{recipeId}/{ingredientId}")]
-    public IActionResult Delete(string recipeId, string ingredientId)
+    public IActionResult Delete(RecipeIngredientDto recipeIngredientDto, string recipeId, string ingredientId)
     {
         if (Guid.TryParse(recipeId, out Guid recipeGuid) && Guid.TryParse(ingredientId, out Guid ingredientGuid))
         {
