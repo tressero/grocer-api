@@ -14,6 +14,7 @@ namespace angular_dotnet.Migrations
                 columns: new[] { "Id", "Description", "Name", "StoreSectionId", "Unit" },
                 values: new object[,]
                 {
+                    { new Guid("00000000-0000-0000-0000-000000000000"), "", "", new Guid("00000000-0000-0000-0000-000000000000"), "Medium Can" },
                     { new Guid("00000000-0000-0000-0000-000000000001"), "", "Canned Corn", new Guid("00000000-0000-0000-0000-000000000000"), "Medium Can" },
                     { new Guid("00000000-0000-0000-0000-000000000002"), "Carrots, Potatoes, Green Beans, Onions version", "Canned Veg All", new Guid("00000000-0000-0000-0000-000000000000"), "Large Can" },
                     { new Guid("00000000-0000-0000-0000-000000000003"), "16 ounces", "Canned Diced Potatoes", new Guid("00000000-0000-0000-0000-000000000000"), "Medium Can" },
