@@ -37,6 +37,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {
     EditableRecipeIngredientTableComponent
 } from "./components/editable-recipe-ingredient-table/editable-recipe-ingredient-table.component";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import {
         MatDatepickerModule,
         MatCheckboxModule,
         MatNativeDateModule,
-        MatButtonModule
+        MatButtonModule,
+        MatIconModule
     ],
   providers: [],
   bootstrap: [AppComponent]
