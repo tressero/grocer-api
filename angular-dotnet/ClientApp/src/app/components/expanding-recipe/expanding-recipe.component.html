@@ -1,13 +1,12 @@
-<mat-accordion>
   <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
+                       (closed)="panelOpenState = false"
+                       [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Recipe: {{ recipe.name}}
       </mat-panel-title>
       <mat-panel-description>
         <a href="{{ recipe.url }}">Link</a>
-
       </mat-panel-description>
     </mat-expansion-panel-header>
     <table  class="mat-elevation-z8 demo-table">
@@ -66,4 +65,3 @@
       </tr>
     </table>
   </mat-expansion-panel>
-</mat-accordion>
