@@ -68,17 +68,25 @@ public class RecipeIngredientController : ControllerBase
         return Ok(_mapper.Map<RecipeIngredientDto>(responseRecipeIngredient));
     }
     [HttpDelete]
+    [HttpPost]
     [Route("[action]/{recipeId}/{ingredientId}")]
-    public IActionResult Delete(RecipeIngredientDto recipeIngredientDto, string recipeId, string ingredientId)
+    public ActionResult Delete(Guid recipeId, Guid ingredientId)
     {
-        if (Guid.TryParse(recipeId, out Guid recipeGuid) && Guid.TryParse(ingredientId, out Guid ingredientGuid))
+        if (recipeId != Guid.Empty && ingredientId != Guid.Empty)
         {
             var recipeIngredient = _unitOfWork.RecipeIngredient.GetAll()
-                .FirstOrDefault(x => x.RecipeId == recipeGuid && x.IngredientId == ingredientGuid);
+                .FirstOrDefault(x => x.RecipeId == recipeId && x.IngredientId == ingredientId);
             if (recipeIngredient != null)
             {
                 _unitOfWork.RecipeIngredient.Remove(recipeIngredient);
-                return Ok();            
+                _unitOfWork.Save();
+                // var shouldNotExist = _unitOfWork.RecipeIngredient.GetAll()
+                //     .FirstOrDefault(x => x.RecipeId == recipeId && x.IngredientId == ingredientId);
+                // if (shouldNotExist == null)
+                // {                
+                    return Ok();            
+                // }
+                // return Problem("Item still exists somehow");
             }
             else
             {
