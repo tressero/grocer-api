@@ -26,7 +26,8 @@ export class RecipeService {
   }
 
   addOrUpdate(recipe: Recipe): Observable<Recipe> {
-    return this.http.post<Recipe>(`${this.serviceUrl}/addOrUpdate`, recipe);
+    console.log('AddOrUpdate(',recipe);
+    return this.http.post<Recipe>(`${this.serviceUrl}/AddOrUpdate`, recipe);
   }
 
   delete(recipe: Recipe): Observable<Recipe> {

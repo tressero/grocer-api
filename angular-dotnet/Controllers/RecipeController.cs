@@ -46,4 +46,42 @@ public class RecipeController : ControllerBase
         var recipeDtos = recipes.ProjectTo<RecipeDto>(_mapper.ConfigurationProvider);
         return recipeDtos;
     }
+    
+    [HttpPost]
+    [Route("[action]")]
+    [Route("[action]/{recipeId}")]
+    public ActionResult<RecipeDto> AddOrUpdate(RecipeDto recipeDto, Guid recipeId)
+    {
+        var recipeToUpdate = _unitOfWork.Recipe.GetAll().FirstOrDefault(x => x.Id == recipeDto.Id);
+        
+        Recipe? responseRecipe;
+        if (recipeToUpdate == null)
+        {
+            var recipe = _mapper.Map<Recipe>(recipeDto);
+            responseRecipe = _unitOfWork.Recipe.Add(recipe);
+        }
+        else
+        {
+            responseRecipe = _mapper.Map(recipeDto, recipeToUpdate);
+        }
+        _unitOfWork.Save();
+        return Ok(_mapper.Map<RecipeDto>(responseRecipe));
+    }
+    [HttpDelete]
+    [Route("[action]/{recipeId}")]
+    public IActionResult Delete(RecipeDto recipeDto, Guid recipeId)
+    {
+        if (recipeId != Guid.Empty)
+        {
+            var recipe = _unitOfWork.Recipe.GetAll()
+                .FirstOrDefault(x => x.Id == recipeId);
+            if (recipe != null)
+            {
+                _unitOfWork.Recipe.Remove(recipe);
+                return Ok();            
+            }
+            return NotFound();
+        }
+        return BadRequest("Invalid or Empty Guid");
+    }
 }
