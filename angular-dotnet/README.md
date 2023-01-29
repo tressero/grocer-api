@@ -1,4 +1,18 @@
-
+##### TODO
+- [ ] Figure out better approach for relationship between Ingredients (grocery items, e.g. bag of cheese) and recipe ingredients (measurement quantities, e.g. cup of cheese).
+  - i.e. should there be an intermediary table to translate or break down StoreIngredients into components?
+    - E.g. Large Bag (1) == Cups (10) == oz (32) = tbsp (16*10)
+      - Categorizing, it's
+        - Volume (e.g. Cup), and it's derivatives (e.g. tbsp, tsp, kg)
+        - Weight (e.g. Ounce) and it's derivatives (e.g. lb)
+        - Qualitative (e.g. Large Bag, Medium Bag, or Medium Box), and it's above relationships defined
+- [ ] Editing Recipes
+  - [ ] Refresh recipeIngredients so it's less of a pain
+  - [ ] Needs names + working URLs to edit or when creating
+  - [ ] Prompt when deleting recipe
+- [ ] Shopping List
+  - [ ] Select Recipe, Select Quantity, 
+  - [ ] Output
 ```bash
 
 # INITIALIZE
