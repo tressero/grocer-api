@@ -11,12 +11,15 @@
     </mat-expansion-panel-header>
     <table  class="mat-elevation-z8 demo-table">
       <thead>
+      <button class="button-add-row" mat-button (click)="openRecipeDialog()"> <!-- (click)="" -->
+        Edit Recipe
+      </button>
       <tr class="mat-header-row">
         <th class="mat-header-cell">Ingredient</th>
         <!--        <th>Description</th>-->
         <th class="mat-header-cell">Count</th>
 <!--        <th class="mat-header-cell">Unit</th>-->
-        <th class="mat-hedaer-cell">
+        <th class="mat-header-cell">
           <button class="button-add-row" mat-button (click)="addRow()">
             Add
           </button>
