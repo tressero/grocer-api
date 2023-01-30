@@ -1,4 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Inject} from '@angular/core';
+
 import {Recipe} from "../../models/recipe";
 import {Ingredient} from "../../models/ingredient";
 import {RecipeIngredient} from "../../models/recipe-ingredient";
@@ -6,8 +7,9 @@ import {StoreSection} from "../../models/store-section";
 import {DisplayedRecipeIngredient} from "../../models/displayed-recipe-ingredient";
 import {IngredientMap} from "../../models/ingredient-map";
 import {RecipeIngredientService} from "../../services/recipe-ingredient.service";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {IngredientService} from "../../services/ingredient.service";
+import {RecipeDialog} from "../recipe-dialog/recipe-dialog.component";
 
 function ingredientMapToList(ingredientMap: IngredientMap) : Ingredient[] {
   // NOTE THIS IS NEVER USED -
@@ -67,12 +69,22 @@ export class ExpandingRecipe {
 
   // displayedRecipeIngredients: DisplayedRecipeIngredient[] = [];
 
-  constructor(private recipeIngredientService: RecipeIngredientService) {}
+  constructor(private recipeIngredientService: RecipeIngredientService,
+              public dialog: MatDialog) {}
   ngOnInit() {
     /* can't set displayedREcipeIngredients here because ti doesn't seem to capture them*/
 
   }
 
+  openRecipeDialog():void {
+    const dialogRef = this.dialog.open(RecipeDialog, this.recipe);
+
+    dialogRef.afterClosed().subscribe(recipe => {
+      console.log(`Dialog result: ${recipe}`);
+      this.recipe = recipe;
+    });
+
+  }
 
   addRow() {
     console.log('expanding-recipe.component.ts addRow(')
