@@ -15,4 +15,5 @@ where
    or R."Name" LIKE 'Chickpeas, Sweet Pot + Broc'
    or R."Name" LIKE 'Weekly / Bi-weekly Purchases'
    or R."Name" LIKE 'White Chicken Chili'
+   or R."Name" LIKE 'WW Salmon'
 order by SS."Name", I."Name"
