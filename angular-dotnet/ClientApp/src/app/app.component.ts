@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {Ingredient} from "./models/ingredient";
 import {Recipe} from "./models/recipe";
 import {RecipeIngredient} from "./models/recipe-ingredient";

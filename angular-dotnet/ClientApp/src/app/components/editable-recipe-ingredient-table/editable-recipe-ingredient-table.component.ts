@@ -1,11 +1,12 @@
 import {Component, DefaultIterableDiffer, Input, OnInit} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 // import { User, UserColumns } from '../../models/user';
 import { IngredientService } from '../../services/ingredient.service';
 import { Ingredient, IngredientColumns } from "../../models/ingredient";
 import { StoreSection} from "../../models/store-section";
+import {RecipeDialog} from "../recipe-dialog/recipe-dialog.component";
 
 @Component({
   selector: 'editable-recipe-ingredient-table',
