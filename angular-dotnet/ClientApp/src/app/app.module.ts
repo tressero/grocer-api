@@ -25,6 +25,8 @@ import {TableDynamicArrayDataExample} from "./components/table-dynamic-array-dat
 import {ConfirmDialogComponent} from "./components/confirm-dialog/confirm-dialog.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {EditableTableComponent} from "./components/editable-table/editable-table.component";
+import {RecipeDialog} from "./components/recipe-dialog/recipe-dialog.component";
+
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {ExpandingRecipe} from "./components/expanding-recipe/expanding-recipe.component";
@@ -53,6 +55,7 @@ import {MatIconModule} from "@angular/material/icon";
         TableDynamicArrayDataExample,
         ConfirmDialogComponent,
         EditableTableComponent,
+        RecipeDialog,
         ExpandingRecipe,
         EditableIngredientTableComponent,
         AutocompleteComponent,

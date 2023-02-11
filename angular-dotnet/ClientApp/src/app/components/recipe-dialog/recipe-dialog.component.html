@@ -1,12 +1,21 @@
 <h1 mat-dialog-title>Edit Recipe</h1>
 <div mat-dialog-content>
-<!--  <input -->
-<!--    [(ngModel)]="recipe.name"-->
-<!--    matInput-->
-<!--  />-->
-
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput type="text"
+           [(ngModel)]="this.recipe.name"
+    >
+  </mat-form-field>
+  <br/>
+  <mat-form-field appearance="fill">
+    <mat-label>URL</mat-label>
+    <input matInput type="text"
+           [(ngModel)]="this.recipe.url"
+    >
+  </mat-form-field>
 </div>
-<!--<mat-dialog-actions align="end">-->
-<!--  <button mat-button mat-dialog-close="">Cancel</button>-->
-<!--  <button mat-button cdkFocusInitial>Save</button> &lt;!&ndash; [mat-dialog-close]="true" &ndash;&gt;-->
-<!--</mat-dialog-actions>-->
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="recipe" cdkFocusInitial>Save</button>
+</mat-dialog-actions>
