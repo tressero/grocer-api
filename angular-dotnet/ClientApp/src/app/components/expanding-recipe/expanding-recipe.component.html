@@ -3,10 +3,10 @@
                        [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Recipe: {{ recipe.name}}
+        * {{ recipe.name}}
       </mat-panel-title>
       <mat-panel-description>
-        <a href="{{ recipe.url }}">Link</a>
+        <a href="{{ recipe.url }}">{{recipe.url}}</a>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <table  class="mat-elevation-z8 demo-table">
