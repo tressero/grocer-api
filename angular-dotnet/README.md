@@ -13,6 +13,11 @@
 - [ ] Shopping List
   - [ ] Select Recipe, Select Quantity, 
   - [ ] Output
+
+From above, focus on 1 + 2 since little time to spend on this project:
+1. Allow edits or creation of recipe URLs/Names (currently in SQL only)
+2. Prevent refresh needed for recipe's ingredient add
+3. Output actual list (SQL is fine for now)
 ```bash
 
 # INITIALIZE
