@@ -69,5 +69,6 @@ export class AppComponent {
     this.recipeService.addOrUpdate(newRecipe).subscribe(() => {
       this.recipes.push(newRecipe);
     });
+
   }
 }
