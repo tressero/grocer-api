@@ -1,15 +1,13 @@
-import {Component, Input, Inject} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 import {Recipe} from "../../models/recipe";
 import {Ingredient} from "../../models/ingredient";
 import {RecipeIngredient} from "../../models/recipe-ingredient";
-import {StoreSection} from "../../models/store-section";
-import {DisplayedRecipeIngredient} from "../../models/displayed-recipe-ingredient";
 import {IngredientMap} from "../../models/ingredient-map";
 import {RecipeIngredientService} from "../../services/recipe-ingredient.service";
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {IngredientService} from "../../services/ingredient.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {RecipeDialog} from "../recipe-dialog/recipe-dialog.component";
+import {RecipeService} from "../../services/recipe.service";
 
 function ingredientMapToList(ingredientMap: IngredientMap) : Ingredient[] {
   // NOTE THIS IS NEVER USED -
@@ -69,21 +67,34 @@ export class ExpandingRecipe {
 
   // displayedRecipeIngredients: DisplayedRecipeIngredient[] = [];
 
-  constructor(private recipeIngredientService: RecipeIngredientService,
+  constructor(private recipeService: RecipeService,
+              private recipeIngredientService: RecipeIngredientService,
               public dialog: MatDialog) {}
   ngOnInit() {
     /* can't set displayedREcipeIngredients here because ti doesn't seem to capture them*/
 
   }
 
-  openRecipeDialog():void {
-    const dialogRef = this.dialog.open(RecipeDialog, this.recipe);
+  openRecipeDialog(recipe: Recipe):void {
 
-    dialogRef.afterClosed().subscribe(recipe => {
-      console.log(`Dialog result: ${recipe}`);
-      this.recipe = recipe;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: recipe.id,
+      name: recipe.name,
+      url: recipe.url
+    };
+    console.log('passing recipe to dialog:',dialogConfig);
+
+    const dialogRef = this.dialog.open(RecipeDialog, dialogConfig);
+
+    dialogRef.afterClosed().subscribe((editedRecipe: Recipe) => {
+      console.log(`Dialog result: ${editedRecipe}`);
+      this.recipeService.addOrUpdate(editedRecipe).subscribe(() => {
+        this.recipe = editedRecipe;
+      });
     });
-
   }
 
   addRow() {
