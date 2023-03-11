@@ -7,40 +7,41 @@ import {Ingredient} from '../models/ingredient';
 import {Recipe} from "../models/recipe";
 import {RecipeIngredient} from "../models/recipe-ingredient";
 import {StoreSection} from "../models/store-section";
+import {BackendService} from "./backend.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class IngredientService {
-  private serviceUrl = '';
+  private ingredientUrl = '';
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') serviceUrl: string) {
-    this.serviceUrl = serviceUrl + "Ingredient";
+  constructor(private http: HttpClient, backendService : BackendService) {
+    this.ingredientUrl = backendService.serviceUrl + "Ingredient";
   }
 
   getIngredients(): Observable<Ingredient[]> {
     debugger;
     return this.http
-      .get(this.serviceUrl + "/GetAll")
+      .get(this.ingredientUrl + "/GetAll")
       .pipe<Ingredient[]>(map((data: any) => data));
   }
 
   updateIngredient(ingredient: Ingredient): Observable<Ingredient> {
-    return this.http.patch<Ingredient>(`${this.serviceUrl}/update/${ingredient.id}`, ingredient);
+    return this.http.patch<Ingredient>(`${this.ingredientUrl}/update/${ingredient.id}`, ingredient);
   }
 
   addIngredient(ingredient: Ingredient): Observable<Ingredient> {
-    return this.http.post<Ingredient>(`${this.serviceUrl}/add`, ingredient);
+    return this.http.post<Ingredient>(`${this.ingredientUrl}/add`, ingredient);
   }
 
   deleteIngredient(id: string): Observable<Ingredient> {
-    return this.http.delete<Ingredient>(`${this.serviceUrl}/delete/${id}`);
+    return this.http.delete<Ingredient>(`${this.ingredientUrl}/delete/${id}`);
   }
 
   deleteIngredients(ingredients: Ingredient[]): Observable<Ingredient[]> {
     return forkJoin(
       ingredients.map((ingredient) =>
-        this.http.delete<Ingredient>(`${this.serviceUrl}/${ingredient.id}`)
+        this.http.delete<Ingredient>(`${this.ingredientUrl}/${ingredient.id}`)
       )
     );
   }

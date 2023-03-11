@@ -7,31 +7,32 @@ import {Ingredient} from '../models/ingredient';
 import {Recipe} from "../models/recipe";
 import {RecipeIngredient} from "../models/recipe-ingredient";
 import {StoreSection} from "../models/store-section";
+import {BackendService} from "./backend.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  private serviceUrl = '';
+  private recipeUrl = '';
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') serviceUrl: string) {
-    this.serviceUrl = serviceUrl + "Recipe";
+  constructor(private http: HttpClient, backendService : BackendService) {
+    this.recipeUrl = backendService.serviceUrl + "Recipe";
   }
 
   getRecipes(): Observable<Recipe[]> {
     debugger;
     return this.http
-      .get(`${this.serviceUrl}/GetAll`)
+      .get(`${this.recipeUrl}/GetAll`)
       .pipe<Recipe[]>(map((data: any) => data));
   }
 
   addOrUpdate(recipe: Recipe): Observable<Recipe> {
     console.log('AddOrUpdate(',recipe);
-    return this.http.post<Recipe>(`${this.serviceUrl}/AddOrUpdate`, recipe);
+    return this.http.post<Recipe>(`${this.recipeUrl}/AddOrUpdate`, recipe);
   }
 
   delete(recipe: Recipe): Observable<Recipe> {
-    return this.http.delete<Recipe>(`${this.serviceUrl}/delete/${recipe.id}/`);
+    return this.http.delete<Recipe>(`${this.recipeUrl}/delete/${recipe.id}/`);
   }
 
 }

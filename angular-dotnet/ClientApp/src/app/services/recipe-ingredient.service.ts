@@ -7,30 +7,31 @@ import {Ingredient} from '../models/ingredient';
 import {Recipe} from "../models/recipe";
 import {RecipeIngredient} from "../models/recipe-ingredient";
 import {StoreSection} from "../models/store-section";
+import {BackendService} from "./backend.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeIngredientService {
-  private serviceUrl = '';
+  private recipeIngredientUrl = '';
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') serviceUrl: string) {
-    this.serviceUrl = serviceUrl + "RecipeIngredient";
+  constructor(private http: HttpClient, backendService : BackendService) {
+    this.recipeIngredientUrl = backendService.serviceUrl + "RecipeIngredient";
   }
 
   getRecipeIngredients(): Observable<RecipeIngredient[]> {
     debugger;
     return this.http
-      .get(`${this.serviceUrl}/GetAll`)
+      .get(`${this.recipeIngredientUrl}/GetAll`)
       .pipe<RecipeIngredient[]>(map((data: any) => data));
   }
 
   addOrUpdate(recipeIngredient: RecipeIngredient): Observable<RecipeIngredient> {
-    return this.http.post<RecipeIngredient>(`${this.serviceUrl}/addOrUpdate`, recipeIngredient);
+    return this.http.post<RecipeIngredient>(`${this.recipeIngredientUrl}/addOrUpdate`, recipeIngredient);
   }
 
   delete(recipeId: string, ingredientId: string): Observable<Ingredient> {
-    return this.http.delete<Ingredient>(`${this.serviceUrl}/delete/${recipeId}/${ingredientId}`);
+    return this.http.delete<Ingredient>(`${this.recipeIngredientUrl}/delete/${recipeId}/${ingredientId}`);
   }
 
 }
