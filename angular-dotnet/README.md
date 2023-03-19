@@ -13,6 +13,9 @@
 - [ ] Shopping List
   - [ ] Select Recipe, Select Quantity, 
   - [ ] Output
+- [ ] Remove package "Microsoft.AspNetCore.SpaProxy" Version="6.0.10" (it's annoying + no ngrok...)
+- [ ] Add webpack for third party TS/JS libs
+- [ ] Add authentication
 
 From above, focus on 1 + 2 since little time to spend on this project, then ship once 1 + 2 done, since 3 is rabbit hole
 DONE(EXCEPT 'ADD') - 1. Allow edits or creation of recipe URLs/Names &#40;currently in SQL only&#41;)
