@@ -9,6 +9,6 @@ export class BackendService {
 
   constructor(private http: HttpClient,
               @Inject('BASE_URL') serviceUrl: string) {
-    this.serviceUrl = serviceUrl + "Ingredient";
+    this.serviceUrl = serviceUrl;
   }
 }
