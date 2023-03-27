@@ -40,7 +40,7 @@ import {
     EditableRecipeIngredientTableComponent
 } from "./components/editable-recipe-ingredient-table/editable-recipe-ingredient-table.component";
 import {MatIconModule} from "@angular/material/icon";
-import { OxRecipeSelectorComponent } from './ox-recipe-selector/ox-recipe-selector.component';
+import {OxRecipeSelectorComponent} from "./components/ox-recipe-selector/ox-recipe-selector.component";
 
 
 @NgModule({
@@ -61,6 +61,7 @@ import { OxRecipeSelectorComponent } from './ox-recipe-selector/ox-recipe-select
         EditableIngredientTableComponent,
         AutocompleteComponent,
         EditableRecipeIngredientTableComponent,
+        OxRecipeSelectorComponent,
         OxRecipeSelectorComponent
     ],
     imports: [
