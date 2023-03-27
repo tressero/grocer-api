@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {Ingredient} from "./models/ingredient";
-import {Recipe} from "./models/recipe";
+import {Recipe, Recipe_Checked} from "./models/recipe";
 import {RecipeIngredient} from "./models/recipe-ingredient";
 import {StoreSection} from "./models/store-section";
 import {RecipeIngredientService} from "./services/recipe-ingredient.service";
@@ -37,11 +37,27 @@ export class AppComponent {
               private recipeService: RecipeService) {
 
     http.get<Recipe[]>(baseUrl + 'Recipe').subscribe(
-      result => { this.recipes = result; },
+      result => {
+          this.recipes = result;
+          this.recipeService.recipes = this.recipes.map(r => {
+            const recipeChecked: Recipe_Checked = {
+              id: r.id,
+              name: r.name,
+              url: r.url,
+              isChecked: false
+              // At whatever user inputs that matter here
+            }
+            return recipeChecked;
+          });
+          console.log('recipes:',this.recipes)
+        },
       error => console.error(error));
 
     http.get<RecipeIngredient[]>(baseUrl + 'RecipeIngredient').subscribe(
-      result => { this.recipeIngredients = result; },
+      result => {
+        this.recipeIngredients = result;
+        console.log('recipeIngredients:',this.recipeIngredients)
+      },
       error => console.error(error));
 
     http.get<Ingredient[]>(baseUrl + 'Ingredient').subscribe(
@@ -69,6 +85,5 @@ export class AppComponent {
     this.recipeService.addOrUpdate(newRecipe).subscribe(() => {
       this.recipes.push(newRecipe);
     });
-
   }
 }

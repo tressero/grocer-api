@@ -4,7 +4,7 @@ import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import {Ingredient} from '../models/ingredient';
-import {Recipe} from "../models/recipe";
+import {Recipe, Recipe_Checked} from "../models/recipe";
 import {RecipeIngredient} from "../models/recipe-ingredient";
 import {StoreSection} from "../models/store-section";
 import {BackendService} from "./backend.service";
@@ -14,6 +14,7 @@ import {BackendService} from "./backend.service";
 })
 export class RecipeService {
   private recipeUrl = '';
+  public recipes : Recipe_Checked[] = [];
 
   constructor(private http: HttpClient, backendService : BackendService) {
     this.recipeUrl = backendService.serviceUrl + "Recipe";
