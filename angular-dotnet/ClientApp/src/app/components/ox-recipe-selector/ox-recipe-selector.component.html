@@ -1,1 +1,5 @@
-<p>ox-recipe-selector works!</p>
+<div *ngFor="let recipe of recipeService.recipes">
+  <mat-checkbox [(ngModel)]="recipe.isChecked" name="{{recipe.name}}">
+    {{recipe.name}}
+  </mat-checkbox>
+</div>
