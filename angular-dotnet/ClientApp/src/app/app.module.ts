@@ -10,21 +10,14 @@ import { MatTableModule } from "@angular/material/table";
 import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
 import { ExpansionOverviewExample } from "./components/expansion-overview-example";
 import {AutocompleteExample} from "./components/autocomplete-example";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from "@angular/material/input";
-import {SelectOverviewExample} from "./components/select-overview-example";
 import {MatSelectModule} from "@angular/material/select";
-import {TableDynamicArrayDataExample} from "./components/table-dynamic-array-data-example";
 import {ConfirmDialogComponent} from "./components/confirm-dialog/confirm-dialog.component";
 import {MatDialogModule} from "@angular/material/dialog";
-import {EditableTableComponent} from "./components/editable-table/editable-table.component";
 import {RecipeDialog} from "./components/recipe-dialog/recipe-dialog.component";
 
 import {MatDatepickerModule} from "@angular/material/datepicker";
@@ -46,16 +39,9 @@ import {OxRecipeSelectorComponent} from "./components/ox-recipe-selector/ox-reci
 @NgModule({
     declarations: [
         AppComponent,
-        NavMenuComponent,
-        HomeComponent,
-        CounterComponent,
-        FetchDataComponent,
         ExpansionOverviewExample,
         AutocompleteExample,
-        SelectOverviewExample,
-        TableDynamicArrayDataExample,
         ConfirmDialogComponent,
-        EditableTableComponent,
         RecipeDialog,
         ExpandingRecipe,
         EditableIngredientTableComponent,
@@ -70,9 +56,9 @@ import {OxRecipeSelectorComponent} from "./components/ox-recipe-selector/ox-reci
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
-            {path: '', component: HomeComponent, pathMatch: 'full'},
-            {path: 'counter', component: CounterComponent},
-            {path: 'fetch-data', component: FetchDataComponent},
+            // {path: '', component: HomeComponent, pathMatch: 'full'},
+            // {path: 'counter', component: CounterComponent},
+            // {path: 'fetch-data', component: FetchDataComponent},
         ]),
         MatTableModule,
         MatExpansionModule,

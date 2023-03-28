@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import {Ingredient} from '../models/ingredient';
+import {IngredientFto} from '../models/ingredientFto';
 import {Recipe} from "../models/recipe";
 import {RecipeIngredient} from "../models/recipe-ingredient";
 import {StoreSection} from "../models/store-section";
@@ -30,8 +30,8 @@ export class RecipeIngredientService {
     return this.http.post<RecipeIngredient>(`${this.recipeIngredientUrl}/addOrUpdate`, recipeIngredient);
   }
 
-  delete(recipeId: string, ingredientId: string): Observable<Ingredient> {
-    return this.http.delete<Ingredient>(`${this.recipeIngredientUrl}/delete/${recipeId}/${ingredientId}`);
+  delete(recipeId: string, ingredientId: string): Observable<IngredientFto> {
+    return this.http.delete<IngredientFto>(`${this.recipeIngredientUrl}/delete/${recipeId}/${ingredientId}`);
   }
 
 }

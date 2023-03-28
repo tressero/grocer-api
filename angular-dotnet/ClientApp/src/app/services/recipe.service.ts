@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import {Ingredient} from '../models/ingredient';
-import {Recipe, Recipe_Checked} from "../models/recipe";
+import {IngredientFto} from '../models/ingredientFto';
+import {Recipe, RecipeFto} from "../models/recipe";
 import {RecipeIngredient} from "../models/recipe-ingredient";
-import {StoreSection} from "../models/store-section";
+import {StoreSection, StoreSectionFto} from "../models/store-section";
 import {BackendService} from "./backend.service";
 
 @Injectable({
@@ -14,7 +14,9 @@ import {BackendService} from "./backend.service";
 })
 export class RecipeService {
   private recipeUrl = '';
-  public recipes : Recipe_Checked[] = [];
+  public recipeFtos : RecipeFto[] = [];
+  public recipeIngredients: RecipeIngredient[] = [];
+
 
   constructor(private http: HttpClient, backendService : BackendService) {
     this.recipeUrl = backendService.serviceUrl + "Recipe";
