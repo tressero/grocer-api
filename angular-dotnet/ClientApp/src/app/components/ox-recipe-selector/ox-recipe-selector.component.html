@@ -1,5 +1,6 @@
-<div *ngFor="let recipe of recipeService.recipes">
+<div *ngFor="let recipe of recipeService.recipeFtos">
   <mat-checkbox [(ngModel)]="recipe.isChecked" name="{{recipe.name}}">
     {{recipe.name}}
   </mat-checkbox>
+
 </div>

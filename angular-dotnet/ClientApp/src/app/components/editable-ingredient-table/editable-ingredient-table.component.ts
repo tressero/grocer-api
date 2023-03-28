@@ -2,9 +2,8 @@ import {Component, DefaultIterableDiffer, Input, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-// import { User, UserColumns } from '../../models/user';
 import { IngredientService } from '../../services/ingredient.service';
-import { Ingredient, IngredientColumns } from "../../models/ingredient";
+import { IngredientFto, IngredientFtoColumns } from "../../models/ingredientFto";
 import {StoreSection} from "../../models/store-section";
 
 @Component({
@@ -14,11 +13,11 @@ import {StoreSection} from "../../models/store-section";
 })
 export class EditableIngredientTableComponent {
 
-  @Input() ingredients!: Ingredient[];
+  @Input() ingredients!: IngredientFto[];
   @Input() storeSections!: StoreSection[];
-  displayedColumns: string[] = IngredientColumns.map((col) => col.key);
-  columnsSchema: any = IngredientColumns;
-  dataSource = new MatTableDataSource<Ingredient>();
+  displayedColumns: string[] = IngredientFtoColumns.map((col) => col.key);
+  columnsSchema: any = IngredientFtoColumns;
+  dataSource = new MatTableDataSource<IngredientFto>();
   valid: any = {};
 
   constructor(public dialog: MatDialog, private ingredientService: IngredientService) {}
@@ -30,10 +29,10 @@ export class EditableIngredientTableComponent {
   }
 
   // TODO - return from update ingredient should maybe set the ingredientColumns part ??? see Users item
-  editRow(row: Ingredient) {
+  editRow(row: IngredientFto) {
     if (row.isNew) {
       debugger;
-      this.ingredientService.addIngredient(row).subscribe((newIngredient: Ingredient) => {
+      this.ingredientService.addIngredient(row).subscribe((newIngredient: IngredientFto) => {
         row.id = newIngredient.id;
         row.name = newIngredient.name;
         row.description = newIngredient.description;
@@ -52,7 +51,7 @@ export class EditableIngredientTableComponent {
 
   addRow() {
     debugger;
-    const newRow: Ingredient = {
+    const newRow: IngredientFto = {
       id: crypto.randomUUID(),
       name: "",
       description: "",
@@ -67,7 +66,7 @@ export class EditableIngredientTableComponent {
   removeRow(id: string) {
     this.ingredientService.deleteIngredient(id).subscribe(() => {
       this.dataSource.data = this.dataSource.data.filter(
-        (u: Ingredient) => u.id !== id
+        (u: IngredientFto) => u.id !== id
       );
     });
   }

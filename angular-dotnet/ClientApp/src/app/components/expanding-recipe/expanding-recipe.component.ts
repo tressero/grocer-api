@@ -1,17 +1,16 @@
 import {Component, Input} from '@angular/core';
 
 import {Recipe} from "../../models/recipe";
-import {Ingredient} from "../../models/ingredient";
+import {IngredientFto, IngredientMap} from "../../models/ingredientFto";
 import {RecipeIngredient} from "../../models/recipe-ingredient";
-import {IngredientMap} from "../../models/ingredient-map";
 import {RecipeIngredientService} from "../../services/recipe-ingredient.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {RecipeDialog} from "../recipe-dialog/recipe-dialog.component";
 import {RecipeService} from "../../services/recipe.service";
 
-function ingredientMapToList(ingredientMap: IngredientMap) : Ingredient[] {
+function ingredientMapToList(ingredientMap: IngredientMap) : IngredientFto[] {
   // NOTE THIS IS NEVER USED -
-  let ingredients : Ingredient[] = [{
+  let ingredients : IngredientFto[] = [{
     id: crypto.randomUUID(),
     name: "",
     description: "",
@@ -22,7 +21,7 @@ function ingredientMapToList(ingredientMap: IngredientMap) : Ingredient[] {
   }];
   return ingredients;
 }
-function ingredientListToMap(ingredients: Ingredient[]) : IngredientMap {
+function ingredientListToMap(ingredients: IngredientFto[]) : IngredientMap {
   let ingredientMap: IngredientMap = {};
   for (let i of ingredients) {
     ingredientMap[i.id] = i;
@@ -53,8 +52,8 @@ export class ExpandingRecipe {
   _recipeIngredients!: RecipeIngredient[];
 
   @Input()
-  get ingredients(): Ingredient[] { return this._ingredients; }
-  set ingredients(ingredients: Ingredient[]) {
+  get ingredients(): IngredientFto[] { return this._ingredients; }
+  set ingredients(ingredients: IngredientFto[]) {
     this._ingredients = ingredients;
 
     let ingredientMap = ingredientListToMap(ingredients);
@@ -62,17 +61,13 @@ export class ExpandingRecipe {
     this._ingredientMap = ingredientMap;
   }
 
-  _ingredients!: Ingredient[];
+  _ingredients!: IngredientFto[];
   _ingredientMap!: IngredientMap;
-
-  // displayedRecipeIngredients: DisplayedRecipeIngredient[] = [];
 
   constructor(private recipeService: RecipeService,
               private recipeIngredientService: RecipeIngredientService,
               public dialog: MatDialog) {}
   ngOnInit() {
-    /* can't set displayedREcipeIngredients here because ti doesn't seem to capture them*/
-
   }
 
   openRecipeDialog(recipe: Recipe):void {

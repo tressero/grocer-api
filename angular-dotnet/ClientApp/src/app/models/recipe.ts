@@ -7,6 +7,6 @@ export interface Recipe {
 
 /* Note: below is current manaully setup to inherit from recipe (manually setting each from it's parent)...
  would be btter to have a contsrctuor like below : https://blog.logrocket.com/writing-constructor-typescript/ */
-export interface Recipe_Checked extends Recipe {
+export interface RecipeFto extends Recipe {
   isChecked: boolean;
 }
