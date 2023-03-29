@@ -1,5 +1,6 @@
 <div *ngFor="let recipe of recipeService.recipeFtos">
-  <mat-checkbox [(ngModel)]="recipe.isChecked" name="{{recipe.name}}">
+  <!-- Need to figure out how to bind the actual object to $event below -->
+  <mat-checkbox [(ngModel)]="recipe.isChecked" name="{{recipe.name}}" (ngModelChange)="recipeClicked(recipe,$event)">
     {{recipe.name}}
   </mat-checkbox>
 

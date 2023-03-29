@@ -22,7 +22,8 @@ export class OxRecipeSelectorComponent implements OnInit {
   // function isIngredient(pet: Ingredient): pet is Ingredient {
   //   return (pet as Ingredient).id !== undefined;
   // }
-  recipeClicked(changedRecipeFto: RecipeFto) {
+  recipeClicked(changedRecipeFto: RecipeFto, changedTo: boolean) {
+    console.log('recipeClicked(',changedRecipeFto,changedTo); // TODO: use this to conditionally add/remove
     let recipeIngredients = this.recipeService.recipeIngredients;
     let recipes = this.recipeService.recipeFtos;
     let ingredients = this.ingredientService.ingredientFtos;
@@ -59,7 +60,7 @@ export class OxRecipeSelectorComponent implements OnInit {
 
       }
     }
-    console.log(ingredientsWithQuantities);
+    console.log('ingredientsWithQuantities',ingredientsWithQuantities);
   }
   ngOnInit(): void {
 
