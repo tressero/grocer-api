@@ -12,6 +12,13 @@ export interface IngredientFto extends Ingredient {
   isNew: boolean;
 }
 
+export interface IngredientWithQuantityByStoreLocationId {
+  [storeLocationName: string] : IngredientWithQuantityAndUses[];
+}
+
+export interface IngredientWithQuantityAndUses extends IngredientWithQuantity {
+  addedRecipesUsedBy: Array<string>
+}
 export interface IngredientWithQuantity extends Ingredient {
   quantity: number;
   storeSectionName: string;
