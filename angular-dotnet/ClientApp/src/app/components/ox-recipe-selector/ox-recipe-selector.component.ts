@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RecipeService} from "../../services/recipe.service";
-import {RecipeFto} from "../../models/recipe";
+import {Recipe, RecipeFto} from "../../models/recipe";
 import {IngredientService} from "../../services/ingredient.service";
 import {RecipeIngredient} from "../../models/recipe-ingredient";
-import {Ingredient, IngredientWithQuantity} from "../../models/ingredientFto";
+import {
+  Ingredient,
+  IngredientWithQuantity,
+  IngredientWithQuantityAndUses,
+  IngredientWithQuantityByStoreLocationId
+} from "../../models/ingredientFto";
 
 @Component({
   selector: 'app-ox-recipe-selector',
@@ -22,6 +27,9 @@ export class OxRecipeSelectorComponent implements OnInit {
   // function isIngredient(pet: Ingredient): pet is Ingredient {
   //   return (pet as Ingredient).id !== undefined;
   // }
+
+  public ingredientWithQuantityByStoreLocationId : IngredientWithQuantityByStoreLocationId = {};
+  public selectedRecipes: RecipeFto[] = []
   recipeClicked(changedRecipeFto: RecipeFto, changedTo: boolean) {
     console.log('recipeClicked(',changedRecipeFto,changedTo); // TODO: use this to conditionally add/remove
     let recipeIngredients = this.recipeService.recipeIngredients;
@@ -29,12 +37,13 @@ export class OxRecipeSelectorComponent implements OnInit {
     let ingredients = this.ingredientService.ingredientFtos;
 
     let storeSections = this.ingredientService.storeSectionFtos;
-    let selectedRecipes = recipes.filter(r => r.isChecked);
+    this.selectedRecipes = recipes.filter(r => r.isChecked);
 
-    let ingredientsWithQuantities: IngredientWithQuantity[] = [];
+    let ingredientsWithQuantities: IngredientWithQuantityAndUses[] = [];
 
-    for (let recipe of selectedRecipes) {
+    for (let recipe of this.selectedRecipes) {
 
+      const abbreviatedRecipeName = recipe.name.replace(/[a-z,+&.\s]/g, '') as string;
       const recipeIngredientsFiltered: RecipeIngredient[] = recipeIngredients.filter(ri => ri.recipeId === recipe.id) ?? [];
 
       for (let riFiltered of recipeIngredientsFiltered) {
@@ -43,24 +52,30 @@ export class OxRecipeSelectorComponent implements OnInit {
 
         if (existingIngredientWithQuantity === undefined){
           let ingredient = ingredients.find(i => i.id === riFiltered.ingredientId) as Ingredient;
-          const newGroceryIngredient: IngredientWithQuantity = {
+          const newGroceryIngredient: IngredientWithQuantityAndUses = {
             id: riFiltered.ingredientId,
             name: ingredient.name,
             unit: ingredient.unit,
             description: ingredient.description,
             storeSectionId: ingredient.storeSectionId,
             storeSectionName: storeSections.find(s => s.id === ingredient.storeSectionId)?.name ?? "",
-            quantity: riFiltered.ingredientCount
+            quantity: riFiltered.ingredientCount,
+            addedRecipesUsedBy: [abbreviatedRecipeName]
           }
           ingredientsWithQuantities.push(newGroceryIngredient);
 
         } else {
           existingIngredientWithQuantity.quantity += riFiltered.ingredientCount;
+          existingIngredientWithQuantity.addedRecipesUsedBy.push(abbreviatedRecipeName);
         }
 
       }
     }
     console.log('ingredientsWithQuantities',ingredientsWithQuantities);
+    for (let section of storeSections) {
+      this.ingredientWithQuantityByStoreLocationId[section.name] = ingredientsWithQuantities.filter(i => i.storeSectionName === section.name) as IngredientWithQuantityAndUses[] ?? [];
+    }
+    console.log('oxRecipeSelector.ingredientWithQuantityByStoreLocationId',this.ingredientWithQuantityByStoreLocationId);
   }
   ngOnInit(): void {
 

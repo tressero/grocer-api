@@ -3,5 +3,30 @@
   <mat-checkbox [(ngModel)]="recipe.isChecked" name="{{recipe.name}}" (ngModelChange)="recipeClicked(recipe,$event)">
     {{recipe.name}}
   </mat-checkbox>
+</div>
+
+<h3>Recipes ##########################################</h3>
+<div *ngFor="let recipe of selectedRecipes">
+  <div style="display:inline;">
+    <span>{{recipe.name}}</span>
+    <a href="{{recipe.url}}"> {{recipe.url}}</a>
+  </div>
 
 </div>
+<br/>
+<h3>Ingredients ############################################</h3>
+<div *ngFor="let section of ingredientWithQuantityByStoreLocationId | keyvalue">
+  <span><u><b>{{section.key}}</b></u> ######################</span>
+  <br/>
+  <div *ngFor="let groceryItem of section.value" style="display:inline;">
+    <span>{{groceryItem.quantity}}x&nbsp;</span>
+    <span>[{{groceryItem.unit}}]&nbsp;</span>
+    <span><b>{{groceryItem.name}}</b>&nbsp;</span>
+    <span>{{groceryItem.description}}</span>
+    [<span *ngFor="let abbreviatedRecipe of groceryItem.addedRecipesUsedBy">{{abbreviatedRecipe}},</span>]
+    <br/>
+  </div>
+</div>
+
+<br/>
+<br/>
