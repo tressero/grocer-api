@@ -2,7 +2,7 @@
 simplified meal planning
 
 ## Development Notes
-For active development features, TODOs, etc., see: [/angular-dotnet/DEVREADME.md](DEVREADME.md)
+For active development features, TODOs, etc., see: [DEVREADME.md](angular-dotnet/DEVREADME.md)
 
 ## Introduction
 ### Add Ingredients (by Store Location)
