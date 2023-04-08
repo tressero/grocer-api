@@ -1,26 +1,25 @@
-##### TODO
-- [ ] Figure out better approach for relationship between Ingredients (grocery items, e.g. bag of cheese) and recipe ingredients (measurement quantities, e.g. cup of cheese).
+##### Issues / Features
+DESIGN Figure out better approach for relationship between Ingredients (grocery items, e.g. bag of cheese) and recipe ingredients (measurement quantities, e.g. cup of cheese).
   - i.e. should there be an intermediary table to translate or break down StoreIngredients into components?
     - E.g. Large Bag (1) == Cups (10) == oz (32) = tbsp (16*10)
       - Categorizing, it's
         - Volume (e.g. Cup), and it's derivatives (e.g. tbsp, tsp, kg)
         - Weight (e.g. Ounce) and it's derivatives (e.g. lb)
         - Qualitative (e.g. Large Bag, Medium Bag, or Medium Box), and it's above relationships defined
-- [ ] Editing Recipes
-  - [ ] Refresh recipeIngredients so it's less of a pain
+TODO Editing Recipes
+  - [ ] Refresh recipeIngredients (via angular services' state) so it's less of a pain
   - [ ] Needs names + working URLs to edit or when creating
   - [ ] Prompt when deleting recipe
-- [ ] Shopping List
-  - [ ] Select Recipe, Select Quantity, 
-  - [ ] Output
-- [ ] Remove package "Microsoft.AspNetCore.SpaProxy" Version="6.0.10" (it's annoying + no ngrok...)
-- [ ] Add webpack for third party TS/JS libs
-- [ ] Add authentication
+IN PROGRESS Initial Shopping List
+  - [x] Select Recipe, Select Quantity, 
+  - [x] Output
+  - [ ] RxJS for state, or something like Cashew to save objects in cache (for now - server based shopping lists is a "later" feature)
+    - Curious if one is more common for Ionic/Capacitor ?
+DONE Remove package "Microsoft.AspNetCore.SpaProxy" Version="6.0.10" (it's annoying + no ngrok...) - WORKAROUND
+TODO Add webpack for third party TS/JS libs
+DONE Add authentication - DONE via ngrok currently
 
-From above, focus on 1 + 2 since little time to spend on this project, then ship once 1 + 2 done, since 3 is rabbit hole
-DONE(EXCEPT 'ADD') - 1. Allow edits or creation of recipe URLs/Names &#40;currently in SQL only&#41;)
-2. Prevent refresh needed for recipe's ingredient add
-3. Output actual list (SQL is fine for now)
+
 ```bash
 
 # INITIALIZE
