@@ -1,4 +1,5 @@
 ##### Issues / Features
+
 DESIGN Figure out better approach for relationship between Ingredients (grocery items, e.g. bag of cheese) and recipe ingredients (measurement quantities, e.g. cup of cheese).
   - i.e. should there be an intermediary table to translate or break down StoreIngredients into components?
     - E.g. Large Bag (1) == Cups (10) == oz (32) = tbsp (16*10)
@@ -6,18 +7,23 @@ DESIGN Figure out better approach for relationship between Ingredients (grocery 
         - Volume (e.g. Cup), and it's derivatives (e.g. tbsp, tsp, kg)
         - Weight (e.g. Ounce) and it's derivatives (e.g. lb)
         - Qualitative (e.g. Large Bag, Medium Bag, or Medium Box), and it's above relationships defined
+        
 TODO Editing Recipes
   - [ ] Refresh recipeIngredients (via angular services' state) so it's less of a pain
   - [ ] Needs names + working URLs to edit or when creating
   - [ ] Prompt when deleting recipe
+ 
 IN PROGRESS Initial Shopping List
   - [x] Select Recipe, Select Quantity, 
   - [x] Output
   - [ ] RxJS for state, or something like Cashew to save objects in cache (for now - server based shopping lists is a "later" feature)
     - Curious if one is more common for Ionic/Capacitor ?
+    
 DONE Remove package "Microsoft.AspNetCore.SpaProxy" Version="6.0.10" (it's annoying + no ngrok...) - WORKAROUND
+
 TODO Add webpack for third party TS/JS libs
-DONE Add authentication - DONE via ngrok currently
+
+\DONE Add authentication - DONE via ngrok currently
 
 
 ```bash
