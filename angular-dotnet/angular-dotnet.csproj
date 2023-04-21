@@ -14,9 +14,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-    <SpaRoot>ClientApp\</SpaRoot>
-    <SpaProxyServerUrl>https://localhost:443</SpaProxyServerUrl>
-    <SpaProxyLaunchCommand>npm build</SpaProxyLaunchCommand>
     <RootNamespace>angular_dotnet</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
