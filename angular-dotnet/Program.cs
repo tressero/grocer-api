@@ -1,24 +1,36 @@
 using angular_dotnet.DbContext;
+using angular_dotnet.Settings;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+string ASPNETCORE_ENVIRONMENT = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
 // Add services to the container.
 // builder.Services.AddDbContext<GrocerContext>(); if in file already
-builder.Services.AddDbContext <GrocerContext> (options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
-);
-builder.Services.AddTransient < IUnitOfWork, UnitOfWork > ();
-builder.Services.AddControllersWithViews();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.Configure<RootSettings>(builder.Configuration);
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+var services = builder.Services;
+{
+    var rootSettings = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<RootSettings>>().Value;
+    builder.Services.AddDbContext <GrocerContext> (options => 
+        options.UseNpgsql(rootSettings.ConnectionStrings.Default)
+    );
+    builder.Services.AddTransient < IUnitOfWork, UnitOfWork > ();
+    builder.Services.AddControllersWithViews();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // await using var ctx = new GrocerContext();
+}
+
 
 var app = builder.Build();
+
+var rootSettingsPostBuild = app.Services.GetRequiredService<IOptions<RootSettings>>().Value; // Post build Access
 
 
 // Configure the HTTP request pipeline.
