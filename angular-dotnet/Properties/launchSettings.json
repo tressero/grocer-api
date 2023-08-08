@@ -13,7 +13,7 @@
       "launchBrowser": false,
       "applicationUrl": "http://localhost:5165;http://localhost:30523;",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "plain_dotnet": {
@@ -28,7 +28,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }
