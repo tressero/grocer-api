@@ -9,6 +9,7 @@ string ASPNETCORE_ENVIRONMENT = Environment.GetEnvironmentVariable("ASPNETCORE_E
 // Add services to the container.
 // builder.Services.AddDbContext<GrocerContext>(); if in file already
 builder.Services.Configure<RootSettings>(builder.Configuration);
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var services = builder.Services;
 {
@@ -23,7 +24,17 @@ var services = builder.Services;
     builder.Services.AddSwaggerGen();
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: MyAllowSpecificOrigins,
+            policy  =>
+            {
+                policy.WithOrigins(
+                    "https://localhost:44436",
+                    "https://grocer-np.ochsner.me",
+                    "https://grocer.ochsner.me");
+            });
+    });
 // await using var ctx = new GrocerContext();
 }
 
@@ -32,6 +43,7 @@ var app = builder.Build();
 
 var rootSettingsPostBuild = app.Services.GetRequiredService<IOptions<RootSettings>>().Value; // Post build Access
 
+app.UseCors(MyAllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
