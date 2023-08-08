@@ -24,6 +24,16 @@ public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        if (env != "Production")
+        {
+            modelBuilder.HasDefaultSchema("tressero_np");
+            Debug.WriteLine("CONNECTING TO SCHEMA: tressero_np");
+        }
+        else
+        {
+            Debug.WriteLine("CONNECTING TO DEFAULT SCHEMA");
+        }
         /* Relations */
         modelBuilder.Entity<RecipeIngredientJunction>(entity =>
         {
