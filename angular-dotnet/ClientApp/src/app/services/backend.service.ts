@@ -5,10 +5,9 @@ import {Inject, Injectable} from "@angular/core";
   providedIn: 'root',
 })
 export class BackendService {
-  public serviceUrl = '';
+  public serviceUrl = ''; // Gets set later, no point initializing to anything
 
-  constructor(private http: HttpClient,
-              @Inject('BASE_URL') serviceUrl: string) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') serviceUrl: string) {
     this.serviceUrl = serviceUrl;
   }
 }
