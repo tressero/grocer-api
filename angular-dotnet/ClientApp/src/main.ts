@@ -5,8 +5,9 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 export function getBaseUrl() {
-  return "https://grocer-np.ochsner.me/api/";
-  // return "http://localhost:5165"
+  /* change this for the backend api */
+  // return "https://grocer-np.ochsner.me/api/";
+  return "http://localhost:5165/";
   if (environment.production) {
     return document.getElementsByTagName('base')[0].href + "/api/";
   } else {

@@ -29,10 +29,15 @@ var services = builder.Services;
         options.AddPolicy(name: MyAllowSpecificOrigins,
             policy  =>
             {
-                policy.WithOrigins(
-                    "https://localhost:44436",
-                    "https://grocer-np.ochsner.me",
-                    "https://grocer.ochsner.me");
+                // policy.WithOrigins(
+                //     "http://localhost:4200",
+                //     "https://localhost:44436",
+                //     "https://grocer-np.ochsner.me",
+                //     "https://grocer.ochsner.me");
+                policy.AllowAnyOrigin();
+                policy.AllowAnyMethod();
+                policy.AllowAnyHeader();
+                // policy.AllowCredentials();
             });
     });
 // await using var ctx = new GrocerContext();

@@ -16,12 +16,12 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "plain_dotnet": {
+    "angular_dotnet-PROD": {
       "commandName": "Project",
       "launchBrowser": false,
       "applicationUrl": "http://localhost:5165;http://localhost:30523;",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
     "IIS Express": {
