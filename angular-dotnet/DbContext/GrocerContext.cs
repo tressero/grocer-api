@@ -29,11 +29,11 @@ public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
         if (env != "Production")
         {
             modelBuilder.HasDefaultSchema("tressero_np");
-            Debug.WriteLine("CONNECTING TO SCHEMA: tressero_np");
+            Console.WriteLine("NONPROD: CONNECTING TO SCHEMA: tressero_np");
         }
         else
         {
-            Debug.WriteLine("CONNECTING TO DEFAULT SCHEMA");
+            Console.WriteLine("PROD: CONNECTING TO DEFAULT SCHEMA");
         }
         /* Relations */
         modelBuilder.Entity<RecipeIngredientJunction>(entity =>
