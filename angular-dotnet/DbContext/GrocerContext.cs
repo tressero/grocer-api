@@ -6,7 +6,10 @@ namespace angular_dotnet.DbContext;
 
 public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
 {
-    public GrocerContext(DbContextOptions options): base(options) {}
+    public GrocerContext(DbContextOptions options, ILogger<GrocerContext> logger) : base(options)
+    {
+        _logger = logger;
+    }
     
     public DbSet<Ingredient> Ingredient { get; set; }
     public DbSet<Recipe> Recipe { get; set; }
@@ -18,6 +21,7 @@ public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
     private static string _password = "";
     private static string _server = "";
     private static string _database = _username;
+    private readonly ILogger<GrocerContext> _logger;
 
     // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //     => optionsBuilder.UseNpgsql($"Host={_server};Username={_username};Password={_password};Database={_database}");
@@ -29,11 +33,11 @@ public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
         if (env != "Production")
         {
             modelBuilder.HasDefaultSchema("tressero_np");
-            Console.WriteLine("NONPROD: CONNECTING TO SCHEMA: tressero_np");
+            _logger.LogInformation("NONPROD: CONNECTING TO SCHEMA: tressero_np");
         }
         else
         {
-            Console.WriteLine("PROD: CONNECTING TO DEFAULT SCHEMA");
+            _logger.LogInformation("PROD: CONNECTING TO DEFAULT SCHEMA");
         }
         /* Relations */
         modelBuilder.Entity<RecipeIngredientJunction>(entity =>
