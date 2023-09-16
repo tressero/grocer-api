@@ -18,6 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddSerilog();
 string ASPNETCORE_ENVIRONMENT = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
+Log.Information("{ASPNETCORE_ENVIRONMENT} {builder.Configuration}");
 // Add services to the container.
 // builder.Services.AddDbContext<GrocerContext>(); if in file already
 builder.Services.Configure<RootSettings>(builder.Configuration);

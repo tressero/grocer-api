@@ -30,6 +30,7 @@ public class GrocerContext : Microsoft.EntityFrameworkCore.DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        _logger.LogInformation("Environment.GetEnvironmentVariable(\"ASPNETCORE_ENVIRONMENT\") {0}",env);
         if (env != "Production")
         {
             modelBuilder.HasDefaultSchema("tressero_np");
