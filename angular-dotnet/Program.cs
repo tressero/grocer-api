@@ -23,6 +23,8 @@ var services = builder.Services;
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services.AddLogging(x => x.AddConsole());
+    
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     builder.Services.AddCors(options =>
     {
