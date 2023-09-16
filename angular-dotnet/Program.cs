@@ -3,11 +3,15 @@ using angular_dotnet.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
+using Serilog.Events;
 
 Serilog.Debugging.SelfLog.Enable(Console.Error);
 Log.Logger = new LoggerConfiguration()
-    .WriteTo
-    .File(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log"), rollingInterval: RollingInterval.Day)
+    .WriteTo.Seq(serverUrl:"http://grocer.ochsner.me:5341",
+        LogEventLevel.Information,
+        batchPostingLimit:1000,
+        apiKey:"rOItsfhl4CyiNXZw7FW3")
+    // .File(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log"), rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
