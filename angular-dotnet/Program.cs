@@ -2,17 +2,27 @@ using angular_dotnet.DbContext;
 using angular_dotnet.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Serilog;
+
+Serilog.Debugging.SelfLog.Enable(Console.Error);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo
+    .File(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log"), rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.AddSerilog();
 string ASPNETCORE_ENVIRONMENT = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
 // Add services to the container.
 // builder.Services.AddDbContext<GrocerContext>(); if in file already
 builder.Services.Configure<RootSettings>(builder.Configuration);
+
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var services = builder.Services;
 {
+    
     var rootSettings = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<RootSettings>>().Value;
     builder.Services.AddDbContext <GrocerContext> (options => 
         options.UseNpgsql(rootSettings.ConnectionStrings.Default)
