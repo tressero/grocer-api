@@ -1,0 +1,6 @@
+﻿services:
+  angular-dotnet:
+    image: angular-dotnet
+    build:
+      context: .
+      dockerfile: angular-dotnet/ClientApp/Dockerfile

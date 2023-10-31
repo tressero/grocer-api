@@ -53,7 +53,7 @@ public class RecipeIngredientController : ControllerBase
     {
         var recipeIngredientToUpdate = _unitOfWork.RecipeIngredient.GetAll()
             .FirstOrDefault(x => 
-                x.RecipeId == recipeIngredientDto.RecipeId && x.IngredientId == recipeIngredientDto.IngredientId);
+                x.RecipeId == recipeIngredientDto.RecipeId && x.IngredientId == recipeIngredientDto.IngredientId); // BUG - this serach won't work. 
         RecipeIngredientJunction? responseRecipeIngredient;
         if (recipeIngredientToUpdate == null)
         {
