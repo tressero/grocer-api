@@ -60,11 +60,15 @@ public class RecipeIngredientController : ControllerBase
         var recipeIngredientToUpdate = _unitOfWork.RecipeIngredient.GetAll()
             .FirstOrDefault(x => 
                 x.RecipeId == recipeIngredientDto.RecipeId && x.IngredientId == recipeIngredientDto.OldIngredientId); // BUG - this serach won't work. 
+        var test = _unitOfWork.RecipeIngredient.GetAll()
+            .FirstOrDefault(x => 
+                x.RecipeId == recipeIngredientDto.RecipeId && x.IngredientId == recipeIngredientDto.NewIngredientId); 
         RecipeIngredientJunction? responseRecipeIngredient;
         if (recipeIngredientToUpdate == null)
         {
             var recipeIngredient = _mapper.Map<RecipeIngredientJunction>(recipeIngredientDto);
             responseRecipeIngredient = _unitOfWork.RecipeIngredient.Add(recipeIngredient);
+            
         }
         else
         {
