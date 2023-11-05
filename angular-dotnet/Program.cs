@@ -1,5 +1,7 @@
 using angular_dotnet.DbContext;
+using angular_dotnet.Dto;
 using angular_dotnet.Settings;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
@@ -39,7 +41,15 @@ var services = builder.Services;
     builder.Services.AddSwaggerGen();
 
     builder.Services.AddLogging(x => x.AddConsole());
-    
+    #region Automapper config
+    var mapperConfig = new MapperConfiguration(mc =>
+    {
+        mc.AddProfile(new AutoMapperProfile());
+    });
+
+    IMapper mapper = mapperConfig.CreateMapper();
+    services.AddSingleton(mapper);
+    #endregion
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     builder.Services.AddCors(options =>
     {

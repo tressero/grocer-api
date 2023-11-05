@@ -43,7 +43,13 @@ public class RecipeIngredientController : ControllerBase
     public IEnumerable<RecipeIngredientDto> GetAll()
     {
         var recipeIngredientJunctions = _unitOfWork.RecipeIngredient.GetAll().AsQueryable();
+        #if DEBUG
+        var list = recipeIngredientJunctions.ToList();
+        #endif
         var recipeIngredientDtos = recipeIngredientJunctions.ProjectTo<RecipeIngredientDto>(_mapper.ConfigurationProvider);
+#if DEBUG
+        var asdf = recipeIngredientDtos.ToList();
+#endif
         return recipeIngredientDtos;
     }
     
@@ -53,7 +59,7 @@ public class RecipeIngredientController : ControllerBase
     {
         var recipeIngredientToUpdate = _unitOfWork.RecipeIngredient.GetAll()
             .FirstOrDefault(x => 
-                x.RecipeId == recipeIngredientDto.RecipeId && x.IngredientId == recipeIngredientDto.IngredientId); // BUG - this serach won't work. 
+                x.RecipeId == recipeIngredientDto.RecipeId && x.IngredientId == recipeIngredientDto.OldIngredientId); // BUG - this serach won't work. 
         RecipeIngredientJunction? responseRecipeIngredient;
         if (recipeIngredientToUpdate == null)
         {
@@ -62,7 +68,13 @@ public class RecipeIngredientController : ControllerBase
         }
         else
         {
+            // TODO validate oldingredientid -> newIngredientId change
             responseRecipeIngredient = _mapper.Map(recipeIngredientDto, recipeIngredientToUpdate);
+            if (recipeIngredientDto.NewIngredientId.HasValue)
+            {
+                responseRecipeIngredient.IngredientId = recipeIngredientDto.NewIngredientId.Value;
+            }
+
         }
         _unitOfWork.Save();
         return Ok(_mapper.Map<RecipeIngredientDto>(responseRecipeIngredient));

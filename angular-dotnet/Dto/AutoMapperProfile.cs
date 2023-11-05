@@ -13,8 +13,13 @@ public class AutoMapperProfile: Profile
         CreateMap<Ingredient, IngredientDto>();
         CreateMap<IngredientDto, Ingredient>();
 
-        CreateMap<RecipeIngredientJunction, RecipeIngredientDto>();
-        CreateMap<RecipeIngredientDto, RecipeIngredientJunction>();
+        CreateMap<RecipeIngredientJunction, RecipeIngredientDto>()
+            .ForMember(dest => dest.OldIngredientId, 
+                opt => opt.MapFrom<Guid>(src => src.IngredientId));
+        CreateMap<RecipeIngredientDto, RecipeIngredientJunction>()
+            .ForMember(dest => dest.IngredientId, 
+                opt => opt.MapFrom<Guid>(src => src.OldIngredientId));
+            // .ForMember(dest => dest.Total, opt => opt.MapFrom<CustomResolver>()));
 
         CreateMap<StoreSection, StoreSectionDto>();
         CreateMap<StoreSectionDto, StoreSection>();
