@@ -43,9 +43,9 @@ public class RecipeIngredientController : ControllerBase
     public IEnumerable<RecipeIngredientDto> GetAll()
     {
         var recipeIngredientJunctions = _unitOfWork.RecipeIngredient.GetAll().AsQueryable();
-        #if DEBUG
+#if DEBUG
         var list = recipeIngredientJunctions.ToList();
-        #endif
+#endif
         var recipeIngredientDtos = recipeIngredientJunctions.ProjectTo<RecipeIngredientDto>(_mapper.ConfigurationProvider);
 #if DEBUG
         var asdf = recipeIngredientDtos.ToList();
@@ -55,34 +55,44 @@ public class RecipeIngredientController : ControllerBase
     
     [HttpPost]
     [Route("[action]")]
-    public ActionResult<RecipeIngredientDto> AddOrUpdate(RecipeIngredientDto recipeIngredientDto)
+    public ActionResult<RecipeIngredientDto> AddOrUpdate(RecipeIngredientDto reqRecipeIngredientDto)
     {
-        var recipeIngredientToUpdate = _unitOfWork.RecipeIngredient.GetAll()
-            .FirstOrDefault(x => 
-                x.RecipeId == recipeIngredientDto.RecipeId && x.IngredientId == recipeIngredientDto.OldIngredientId); // BUG - this serach won't work. 
-        var test = _unitOfWork.RecipeIngredient.GetAll()
-            .FirstOrDefault(x => 
-                x.RecipeId == recipeIngredientDto.RecipeId && x.IngredientId == recipeIngredientDto.NewIngredientId); 
-        RecipeIngredientJunction? responseRecipeIngredient;
-        if (recipeIngredientToUpdate == null)
+        RecipeIngredientJunction? resRecipeIngredientModel;
+        if (reqRecipeIngredientDto.NewIngredientId.HasValue && reqRecipeIngredientDto.OldIngredientId == null)
         {
-            var recipeIngredient = _mapper.Map<RecipeIngredientJunction>(recipeIngredientDto);
-            responseRecipeIngredient = _unitOfWork.RecipeIngredient.Add(recipeIngredient);
-            
+            // Addition
+            var recipeIngredient = _mapper.Map<RecipeIngredientJunction>(reqRecipeIngredientDto);
+            resRecipeIngredientModel = _unitOfWork.RecipeIngredient.Add(recipeIngredient);
         }
         else
         {
-            // TODO validate oldingredientid -> newIngredientId change
-            responseRecipeIngredient = _mapper.Map(recipeIngredientDto, recipeIngredientToUpdate);
-            if (recipeIngredientDto.NewIngredientId.HasValue)
+            var existingRecipeIngredientModel = _unitOfWork.RecipeIngredient.GetAll()
+                .FirstOrDefault(x => 
+                    x.RecipeId == reqRecipeIngredientDto.RecipeId && x.IngredientId == reqRecipeIngredientDto.OldIngredientId);
+            if (existingRecipeIngredientModel == null) return BadRequest("Recipe ingredient that was modified no longer exists");
+            
+            if (reqRecipeIngredientDto is { NewIngredientId: not null, OldIngredientId: not null })
             {
-                responseRecipeIngredient.IngredientId = recipeIngredientDto.NewIngredientId.Value;
+                _unitOfWork.RecipeIngredient.Remove(existingRecipeIngredientModel);
+                var recipeIngredientJunction = _mapper.Map<RecipeIngredientJunction>(reqRecipeIngredientDto);
+                recipeIngredientJunction.IngredientId = reqRecipeIngredientDto.NewIngredientId.Value;
+                resRecipeIngredientModel = _unitOfWork.RecipeIngredient.Add(recipeIngredientJunction);
             }
-
+            else if (reqRecipeIngredientDto.NewIngredientId.HasValue)
+            {
+                resRecipeIngredientModel = _mapper.Map(reqRecipeIngredientDto, existingRecipeIngredientModel);
+            }
+            else
+            {
+                return BadRequest("An ingredient needs to be selected.");
+            }
         }
+
         _unitOfWork.Save();
-        return Ok(_mapper.Map<RecipeIngredientDto>(responseRecipeIngredient));
+        var resRecipeIngredientDto = _mapper.Map<RecipeIngredientDto>(resRecipeIngredientModel);
+        return Ok(resRecipeIngredientDto);
     }
+    
     [HttpDelete]
     [HttpPost]
     [Route("[action]/{recipeId}/{ingredientId}")]
